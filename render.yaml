@@ -1,0 +1,28 @@
+# Requires account review: the persistent database and service use paid plans.
+# Do not apply this blueprint without approving the charges.
+services:
+  - type: web
+    name: employee-management-api
+    runtime: docker
+    plan: starter
+    rootDir: backend
+    healthCheckPath: /actuator/health
+    autoDeploy: false
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        fromDatabase:
+          name: employee-management-db
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: employee-management-db
+          property: password
+      - key: CORS_ORIGINS
+        sync: false
+databases:
+  - name: employee-management-db
+    databaseName: employees
+    user: employees
+    plan: basic-256mb
