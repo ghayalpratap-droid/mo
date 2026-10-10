@@ -58,7 +58,9 @@ export default function EmployeeForm({
                 }
                 maxLength={500}
                 aria-label={label}
-                aria-describedby={errors[key] || serverErrors[key] ? `error-${key}` : undefined}
+                aria-describedby={
+                  errors[key] || serverErrors[key] ? `error-${key}` : undefined
+                }
                 aria-invalid={!!(errors[key] || serverErrors[key])}
               />
             ) : (
@@ -72,7 +74,9 @@ export default function EmployeeForm({
                   setValues({ ...values, [key]: e.target.value })
                 }
                 aria-label={label}
-                aria-describedby={errors[key] || serverErrors[key] ? `error-${key}` : undefined}
+                aria-describedby={
+                  errors[key] || serverErrors[key] ? `error-${key}` : undefined
+                }
                 aria-invalid={!!(errors[key] || serverErrors[key])}
               />
             )}

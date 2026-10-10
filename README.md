@@ -23,7 +23,7 @@ For hot reload, run `docker compose up -d db`, export DATABASE_URL (`jdbc:postgr
 
 Java 17+ and Maven 3.9+: `mvn -f backend/pom.xml verify`. Unit tests cover service behavior; MockMvc integration tests exercise CRUD, validation, missing records, CORS and health using isolated H2. The PostgreSQL smoke test validates the real database workflow separately.
 
-Node 22+: `cd frontend && npm ci && npm test && npm run build`. Frontend tests cover validation, form submission, listing/search, editing, delete confirmation and API failure/retry.
+Node 22.12+: `cd frontend && npm ci && npm test && npm run build`. Frontend tests cover validation, form submission, listing/search, editing, delete confirmation and API failure/retry.
 
 ## Production deployment
 
@@ -41,3 +41,9 @@ API: POST/GET `/api/employees`; GET/PUT/DELETE `/api/employees/{id}`. Errors ret
 ## Future changes
 
 Inspect the repository, create a feature branch, update entity/DTO/API/UI and relevant tests, run checks, commit and push the branch, open a PR, and obtain approval before merge. Main CI gates deployments. Never commit `.env` or credentials. Cloud tasks are already isolated: use the existing checkout; do not create a worktree unless requested.
+
+## Prepared cloud workspace
+
+The onboarding environment supplies Docker, Node and Python. `bash scripts/cloud-install.sh` prepares a verified Java 17/Maven toolchain in `/workspace/tools`, installs the frozen frontend lockfile, and runs backend/frontend tests and builds. It uses the platform proxy and system trust store without disabling TLS checks. `bash scripts/cloud-start.sh` starts Compose PostgreSQL plus the backend and Vite frontend, generates an ignored local database password if needed, and runs the PostgreSQL API smoke test. Repeat the startup command after restoring a cloud snapshot; processes do not survive publication.
+
+Optional browser check: install Python Playwright and its Chromium browser, then run `python3 scripts/e2e.py`. In this prepared cloud machine use `CHROMIUM_PATH=/usr/bin/chromium python3 scripts/e2e.py`. The script tests CRUD, page refresh, validation and mobile layout; it assumes an otherwise empty demo directory. Do not run it against real employee data. Screenshots go to `/tmp/employee-desktop.png` and `/tmp/employee-mobile.png`.
