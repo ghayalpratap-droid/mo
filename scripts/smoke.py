@@ -29,4 +29,4 @@ try:
 finally:
     assert request(path,'DELETE')[0]==204
 assert request(path)[0]==404
-print('PASS: PostgreSQL API create, list, read, update, validation, delete and health')
+print('PASS: API create, list, read, update, validation, delete and health')

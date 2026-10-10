@@ -5,3 +5,7 @@ target/
 .env.*
 !.env.example
 *.log
+
+# Local H2 database
+backend/data/
+data/
