@@ -78,4 +78,42 @@ class EmployeeIntegrationTest {
                 .header("Access-Control-Request-Method", "POST"))
         .andExpect(header().string("Access-Control-Allow-Origin", "http://localhost:5173"));
   }
+
+  @Test
+  void rejectsNumericNamesOnCreateAndUpdate() throws Exception {
+    for (String field : java.util.List.of("firstName", "lastName")) {
+      for (String name : java.util.List.of("123", "Sharma43", "１２３", "Rahul@", "---")) {
+        var body = mapper.readTree(valid);
+        ((com.fasterxml.jackson.databind.node.ObjectNode) body).put(field, name);
+        String payload = mapper.writeValueAsString(body);
+        mvc.perform(post("/api/employees").contentType(MediaType.APPLICATION_JSON).content(payload))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.errors." + field).exists());
+        mvc.perform(
+                put("/api/employees/999999")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(payload))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.errors." + field).exists());
+      }
+    }
+  }
+
+  @Test
+  void acceptsInternationalNames() throws Exception {
+    for (String name : java.util.List.of("राहुल", "José", "O’Connor", "Anne-Marie", "De Silva")) {
+      var body = (com.fasterxml.jackson.databind.node.ObjectNode) mapper.readTree(valid);
+      body.put("firstName", name);
+      body.put("lastName", name);
+      var result =
+          mvc.perform(
+                  post("/api/employees")
+                      .contentType(MediaType.APPLICATION_JSON)
+                      .content(mapper.writeValueAsString(body)))
+              .andExpect(status().isCreated())
+              .andReturn();
+      long id = mapper.readTree(result.getResponse().getContentAsString()).get("id").asLong();
+      mvc.perform(delete("/api/employees/" + id)).andExpect(status().isNoContent());
+    }
+  }
 }

@@ -95,3 +95,35 @@ test("offers retry after an API error", async () => {
   await userEvent.click(screen.getByRole("button", { name: "Try again" }));
   expect(await screen.findByText("Rahul Sharma")).toBeInTheDocument();
 });
+
+test("rejects numeric and mixed names but accepts international names", () => {
+  for (const name of ["123", "Sharma43", "１２３", "Rahul@", "---"]) {
+    expect(validate({ ...employee, firstName: name }).firstName).toBeTruthy();
+    expect(validate({ ...employee, lastName: name }).lastName).toBeTruthy();
+  }
+  for (const name of ["राहुल", "José", "O’Connor", "Anne-Marie", "De Silva"]) {
+    expect(validate({ ...employee, firstName: name, lastName: name })).toEqual(
+      {},
+    );
+  }
+});
+test("prevents numeric names from submitting on create and edit", async () => {
+  const submit = vi.fn();
+  const { rerender } = render(
+    <EmployeeForm
+      employee={{ ...employee, lastName: "Sharma43" }}
+      onSubmit={submit}
+      onCancel={() => {}}
+    />,
+  );
+  await userEvent.click(screen.getByRole("button", { name: "Save changes" }));
+  expect(submit).not.toHaveBeenCalled();
+  expect(
+    screen.getByText("Use letters, spaces, apostrophes or hyphens only"),
+  ).toBeInTheDocument();
+  rerender(<EmployeeForm onSubmit={submit} onCancel={() => {}} />);
+  await userEvent.click(
+    screen.getByRole("button", { name: "Create employee" }),
+  );
+  expect(submit).not.toHaveBeenCalled();
+});

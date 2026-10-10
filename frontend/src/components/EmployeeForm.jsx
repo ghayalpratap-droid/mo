@@ -6,6 +6,10 @@ export function validate(v) {
     else if (v[key].trim().length > (key === "address" ? 500 : 100))
       e[key] = "This value is too long";
   }
+  for (const key of ["firstName", "lastName"]) {
+    if (!e[key] && !/^\p{L}[\p{L}\p{M} '’-]*$/u.test(v[key].trim()))
+      e[key] = "Use letters, spaces, apostrophes or hyphens only";
+  }
   if (
     !String(v.age).trim() ||
     !Number.isInteger(Number(v.age)) ||
