@@ -1,4 +1,10 @@
-export default function EmployeeTable({ employees, onView, onEdit, onDelete }) {
+export default function EmployeeTable({
+  employees,
+  onView,
+  onEdit,
+  onDelete,
+  highlightId,
+}) {
   return (
     <div className="table-scroll">
       <table>
@@ -13,7 +19,11 @@ export default function EmployeeTable({ employees, onView, onEdit, onDelete }) {
         </thead>
         <tbody>
           {employees.map((e) => (
-            <tr key={e.id}>
+            <tr
+              key={e.id}
+              data-employee-id={e.id}
+              className={highlightId === e.id ? "employee-bounce" : ""}
+            >
               <td>
                 <button className="person" onClick={() => onView(e)}>
                   <span className="avatar">
@@ -36,14 +46,14 @@ export default function EmployeeTable({ employees, onView, onEdit, onDelete }) {
                     aria-label={`Edit ${e.firstName} ${e.lastName}`}
                     onClick={() => onEdit(e)}
                   >
-                    Edit
+                    <span aria-hidden="true">🛠️</span> Edit
                   </button>
                   <button
                     className="text-button delete"
                     aria-label={`Delete ${e.firstName} ${e.lastName}`}
                     onClick={() => onDelete(e)}
                   >
-                    Delete
+                    <span aria-hidden="true">😢</span> Delete
                   </button>
                 </div>
               </td>

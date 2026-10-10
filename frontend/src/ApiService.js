@@ -4,6 +4,7 @@ const client = axios.create({
   timeout: 15000,
 });
 export const ApiService = {
+  history: () => client.get("/history").then((r) => r.data),
   all: () => client.get("/employees").then((r) => r.data),
   get: (id) => client.get(`/employees/${id}`).then((r) => r.data),
   create: (data) => client.post("/employees", data).then((r) => r.data),

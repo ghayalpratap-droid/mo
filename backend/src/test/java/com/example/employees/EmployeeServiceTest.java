@@ -16,7 +16,9 @@ class EmployeeServiceTest {
   void trimsNamesAndAddress() {
     var repo = mock(EmployeeRepository.class);
     when(repo.save(any())).thenAnswer(i -> i.getArgument(0));
-    var service = new EmployeeService(repo);
+    var service =
+        new EmployeeService(
+            repo, mock(com.example.employees.repository.EmployeeActivityRepository.class));
     var result = service.create(new EmployeeRequest(" Rahul ", " Sharma ", 28, " Pune "));
     assertEquals("Rahul", result.firstName());
     assertEquals("Pune", result.address());
@@ -26,7 +28,12 @@ class EmployeeServiceTest {
   void missingEmployeeFails() {
     var repo = mock(EmployeeRepository.class);
     when(repo.findById(1L)).thenReturn(Optional.empty());
-    assertThrows(EmployeeNotFound.class, () -> new EmployeeService(repo).get(1L));
+    assertThrows(
+        EmployeeNotFound.class,
+        () ->
+            new EmployeeService(
+                    repo, mock(com.example.employees.repository.EmployeeActivityRepository.class))
+                .get(1L));
     verify(repo, never()).save(any(Employee.class));
   }
 }

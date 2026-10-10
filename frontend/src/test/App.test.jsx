@@ -6,6 +6,7 @@ import EmployeeForm, { validate } from "../components/EmployeeForm";
 import { ApiService } from "../ApiService";
 vi.mock("../ApiService", () => ({
   ApiService: {
+    history: vi.fn(),
     all: vi.fn(),
     get: vi.fn(),
     create: vi.fn(),
@@ -24,6 +25,7 @@ const employee = {
 beforeEach(() => {
   vi.clearAllMocks();
   ApiService.all.mockResolvedValue([employee]);
+  ApiService.history.mockResolvedValue([]);
 });
 test("validates required fields and integer age", () => {
   expect(
@@ -126,4 +128,44 @@ test("prevents numeric names from submitting on create and edit", async () => {
     screen.getByRole("button", { name: "Create employee" }),
   );
   expect(submit).not.toHaveBeenCalled();
+});
+
+test("opens persisted history and displays deleted employee", async () => {
+  ApiService.history.mockResolvedValue([
+    {
+      id: 1,
+      employeeId: 7,
+      employeeName: "Former Teammate",
+      action: "DELETED",
+      occurredAt: "2026-10-10T12:00:00Z",
+    },
+  ]);
+  render(<App />);
+  await userEvent.click(screen.getByRole("button", { name: "History" }));
+  expect(await screen.findByText("Former Teammate")).toBeInTheDocument();
+  expect(screen.getByText(/Removed from the team/)).toBeInTheDocument();
+});
+test("shows about and supports muting click sounds", async () => {
+  render(<App />);
+  const sound = screen.getByRole("button", { name: "Click sounds" });
+  expect(sound).toHaveAttribute("aria-pressed", "true");
+  await userEvent.click(sound);
+  expect(sound).toHaveAttribute("aria-pressed", "false");
+  await userEvent.click(screen.getByRole("button", { name: "About" }));
+  expect(
+    screen.getByRole("heading", { name: "About People" }),
+  ).toBeInTheDocument();
+});
+test("saved employee gets a bounce highlight", async () => {
+  ApiService.update.mockResolvedValue(employee);
+  render(<App />);
+  await userEvent.click(
+    await screen.findByRole("button", { name: "Edit Rahul Sharma" }),
+  );
+  await userEvent.click(screen.getByRole("button", { name: "Save changes" }));
+  await waitFor(() =>
+    expect(
+      screen.getByRole("button", { name: "Edit Rahul Sharma" }).closest("tr"),
+    ).toHaveClass("employee-bounce"),
+  );
 });

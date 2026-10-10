@@ -2,7 +2,9 @@ package com.example.employees.service;
 
 import com.example.employees.dto.*;
 import com.example.employees.entity.Employee;
+import com.example.employees.entity.EmployeeActivity;
 import com.example.employees.exception.EmployeeNotFound;
+import com.example.employees.repository.EmployeeActivityRepository;
 import com.example.employees.repository.EmployeeRepository;
 import java.util.List;
 import org.springframework.data.domain.Sort;
@@ -14,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeService {
   private final EmployeeRepository repository;
 
-  public EmployeeService(EmployeeRepository repository) {
+  private final EmployeeActivityRepository activity;
+
+  public EmployeeService(EmployeeRepository repository, EmployeeActivityRepository activity) {
+    this.activity = activity;
     this.repository = repository;
   }
 
@@ -33,22 +38,26 @@ public class EmployeeService {
   }
 
   public EmployeeResponse create(EmployeeRequest r) {
-    return save(new Employee(), r);
+    return save(new Employee(), r, "CREATED");
   }
 
   public EmployeeResponse update(Long id, EmployeeRequest r) {
-    return save(find(id), r);
+    return save(find(id), r, "UPDATED");
   }
 
-  private EmployeeResponse save(Employee e, EmployeeRequest r) {
+  private EmployeeResponse save(Employee e, EmployeeRequest r, String action) {
     e.setFirstName(r.firstName().trim());
     e.setLastName(r.lastName().trim());
     e.setAge(r.age());
     e.setAddress(r.address().trim());
-    return EmployeeResponse.from(repository.save(e));
+    Employee saved = repository.save(e);
+    activity.save(new EmployeeActivity(saved, action));
+    return EmployeeResponse.from(saved);
   }
 
   public void delete(Long id) {
-    repository.delete(find(id));
+    Employee e = find(id);
+    activity.save(new EmployeeActivity(e, "DELETED"));
+    repository.delete(e);
   }
 }

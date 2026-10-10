@@ -17,7 +17,13 @@ export default function DeleteConfirmation({
         <button className="secondary" onClick={onCancel} disabled={busy}>
           Keep employee
         </button>
-        <button className="danger" onClick={onConfirm} disabled={busy}>
+        <button
+          className="danger"
+          onClick={onConfirm}
+          disabled={busy}
+          aria-label={busy ? "Deleting…" : "Delete employee"}
+        >
+          <span aria-hidden="true">😢</span>{" "}
           {busy ? "Deleting…" : "Delete employee"}
         </button>
       </div>

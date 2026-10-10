@@ -116,4 +116,31 @@ class EmployeeIntegrationTest {
       mvc.perform(delete("/api/employees/" + id)).andExpect(status().isNoContent());
     }
   }
+
+  @Test
+  void historyRetainsCreateUpdateAndDelete() throws Exception {
+    var created =
+        mvc.perform(post("/api/employees").contentType(MediaType.APPLICATION_JSON).content(valid))
+            .andExpect(status().isCreated())
+            .andReturn();
+    long id = mapper.readTree(created.getResponse().getContentAsString()).get("id").asLong();
+    mvc.perform(
+            put("/api/employees/" + id)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(valid.replace("28", "29")))
+        .andExpect(status().isOk());
+    mvc.perform(delete("/api/employees/" + id)).andExpect(status().isNoContent());
+    var result = mvc.perform(get("/api/history")).andExpect(status().isOk()).andReturn();
+    var events = mapper.readTree(result.getResponse().getContentAsString());
+    var actions = new java.util.ArrayList<String>();
+    for (var event : events)
+      if (event.get("employeeId").asLong() == id) {
+        actions.add(event.get("action").asText());
+        org.junit.jupiter.api.Assertions.assertEquals(
+            "Rahul Sharma", event.get("employeeName").asText());
+        org.junit.jupiter.api.Assertions.assertNotNull(event.get("occurredAt"));
+      }
+    org.junit.jupiter.api.Assertions.assertEquals(
+        java.util.List.of("DELETED", "UPDATED", "CREATED"), actions);
+  }
 }

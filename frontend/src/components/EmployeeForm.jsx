@@ -101,7 +101,13 @@ export default function EmployeeForm({
         >
           Cancel
         </button>
-        <button disabled={busy}>
+        <button
+          disabled={busy}
+          aria-label={
+            busy ? "Saving…" : employee ? "Save changes" : "Create employee"
+          }
+        >
+          <span aria-hidden="true">{employee ? "🧰" : "😊"}</span>{" "}
           {busy ? "Saving…" : employee ? "Save changes" : "Create employee"}
         </button>
       </div>
