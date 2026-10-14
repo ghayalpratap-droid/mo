@@ -1,0 +1,43 @@
+{
+  "client_date": "2026-10-15",
+  "timezone": "Asia/Calcutta",
+  "java_suites": [
+    {
+      "name": "edu.sis.domain.BusinessTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-14T19:56:54.701Z"
+    },
+    {
+      "name": "edu.sis.knowledge.KnowledgeTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "timestamp": "2026-10-14T19:58:26.337Z"
+    }
+  ],
+  "java_tests_passed": 14,
+  "frontend_tests_passed": 4,
+  "integration_groups_passed": 11,
+  "browser_checks": [
+    "login",
+    "application intake",
+    "registration",
+    "attendance",
+    "payment request",
+    "CoC preview and submission",
+    "refresh persistence",
+    "streamed simulated answer",
+    "citation viewer",
+    "mobile layout",
+    "cross-provider detail denial"
+  ],
+  "mermaid_diagrams_parsed": 24,
+  "retrieval_fixture_recall_at_6": 1.0,
+  "live_openai": "UNRUN: no key present",
+  "complete_master_request": false,
+  "publication": "Draft saved, not published; fresh-task restoration unverified"
+}

@@ -1,0 +1,8 @@
+stateDiagram-v2
+ [*] --> Validating : schema and identity checked
+ Validating --> REJECTED : synthetic rule failure
+ Validating --> ACCEPTED : synthetic rules pass
+ ACCEPTED --> Recorded : command history and outbox transaction
+ REJECTED --> Recorded : rejection history and outbox transaction
+ Recorded --> [*]
+

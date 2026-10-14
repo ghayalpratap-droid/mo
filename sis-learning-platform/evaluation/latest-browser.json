@@ -1,0 +1,15 @@
+{
+  "passed": [
+    "login",
+    "application intake",
+    "registration",
+    "attendance",
+    "payment request",
+    "CoC preview and submission",
+    "refresh persistence",
+    "streamed simulated answer",
+    "citation viewer",
+    "mobile layout",
+    "cross-provider detail denial"
+  ]
+}

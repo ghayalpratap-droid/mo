@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.1-pg17@sha256:3e8b3adfd27b5707128f60956f62a793c3c9326ea8cfaf0eab7adccb5d700b21
+    environment:
+      POSTGRES_DB: sis
+      POSTGRES_PASSWORD: ${SIS_DB_PASSWORD:?Run scripts/configure.sh}
+      SIS_DB_PASSWORD: ${SIS_DB_PASSWORD}
+    ports: ["127.0.0.1:5544:5432"]
+    volumes:
+      - sis-data:/var/lib/postgresql/data
+      - ./infra/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d sis"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  sis-data:

@@ -1,0 +1,15 @@
+CREATE TABLE providers(id varchar(8) PRIMARY KEY,name varchar(100) NOT NULL);
+INSERT INTO providers VALUES('A','Aster Learning College'),('B','Birch Technical Institute');
+CREATE TABLE courses(id varchar(20) PRIMARY KEY,provider varchar(8) NOT NULL REFERENCES providers(id),title varchar(100) NOT NULL,credits integer NOT NULL CHECK(credits>0));
+INSERT INTO courses VALUES('A-CS','A','Computing foundations',120),('A-M1','A','Data literacy module',30),('B-DS','B','Applied data science',120);
+CREATE TABLE applications(id uuid PRIMARY KEY,provider varchar(8) NOT NULL REFERENCES providers(id),source_ref varchar(80) NOT NULL,student_name varchar(100) NOT NULL,source varchar(20) NOT NULL,course_id varchar(20) NOT NULL REFERENCES courses(id),academic_year integer NOT NULL,fee decimal(12,2) NOT NULL CHECK(fee>=0),currency varchar(3) NOT NULL,status varchar(30) NOT NULL,registration varchar(20) NOT NULL,attendance varchar(20) NOT NULL,version bigint NOT NULL,updated_at timestamp with time zone NOT NULL,created_at timestamp with time zone NOT NULL,UNIQUE(provider,source_ref));
+CREATE INDEX applications_scope ON applications(provider,created_at);
+CREATE TABLE histories(id uuid PRIMARY KEY,application_id uuid NOT NULL REFERENCES applications(id),provider varchar(8) NOT NULL,event varchar(60) NOT NULL,detail varchar(500) NOT NULL,actor varchar(40) NOT NULL,occurred_at timestamp with time zone NOT NULL);
+CREATE INDEX histories_app ON histories(application_id,occurred_at);
+CREATE TABLE cocs(id uuid PRIMARY KEY,application_id uuid NOT NULL REFERENCES applications(id),provider varchar(8) NOT NULL,type varchar(30) NOT NULL,status varchar(20) NOT NULL,reason varchar(500) NOT NULL,effective_date date NOT NULL,created_at timestamp with time zone NOT NULL);
+CREATE TABLE instalments(id uuid PRIMARY KEY,application_id uuid NOT NULL REFERENCES applications(id),provider varchar(8) NOT NULL,number integer NOT NULL,amount decimal(12,2) NOT NULL,currency varchar(3) NOT NULL,due_date date NOT NULL,UNIQUE(application_id,number));
+CREATE TABLE request_receipts(provider varchar(8) NOT NULL,request_key varchar(100) NOT NULL,fingerprint varchar(64) NOT NULL,result_id uuid NOT NULL,PRIMARY KEY(provider,request_key));
+CREATE TABLE outbox_events(id uuid PRIMARY KEY,provider varchar(8) NOT NULL,aggregate_id uuid NOT NULL,event_type varchar(60) NOT NULL,status varchar(20) NOT NULL,attempts integer NOT NULL,created_at timestamp with time zone NOT NULL);
+CREATE TABLE processed_events(event_id uuid PRIMARY KEY,receiver varchar(40) NOT NULL,processed_at timestamp with time zone NOT NULL);
+CREATE TABLE import_jobs(id uuid PRIMARY KEY,provider varchar(8) NOT NULL,status varchar(20) NOT NULL,created_at timestamp with time zone NOT NULL);
+CREATE TABLE import_rows(id uuid PRIMARY KEY,job_id uuid NOT NULL REFERENCES import_jobs(id),row_number integer NOT NULL,status varchar(20) NOT NULL,detail varchar(200) NOT NULL);

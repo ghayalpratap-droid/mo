@@ -1,0 +1,15 @@
+capability,implementation,API_UI,test,status
+Identity and access,"shared/SecurityConfig, AuthController, Identity",auth/login; role-aware portal,BusinessTest; verify.py; browser,IMPLEMENTED_LOCAL; external OIDC is proposal
+Provider and reference data,CatalogueController; V4 migration,"providers, catalogue, academic-years",verify.py; schema migration tests,PARTIAL: read models and seeds; administration incomplete
+Students,students; masked projection,students portal,browser data access and provider checks,PARTIAL: synthetic labels; complete customer lifecycle absent
+Applications,"BusinessService, Applications, StudentApplication",applications list/create/detail,7 domain tests; verify.py; browser,IMPLEMENTED_SYNTHETIC_SLICE; not every legacy source-specific rule
+Course catalogue,V4; CatalogueController,courses/modules,migration tests; provider-scoped APIs,PARTIAL: seeded references; detailed variant authoring incomplete
+Tuition and finance,tuition periods/details/snapshots,applications/{id}/tuition-periods,verify.py; dictionary export,IMPLEMENTED_SYNTHETIC_SLICE; source field mapping partial
+Registration and attendance,BusinessService.confirm,detail confirmations/history,BusinessTest; verify.py; browser,IMPLEMENTED_SYNTHETIC_SLICE; separate worklist screens pending
+CoC,BusinessService.preview/change,CoC preview/submission/decisions,BusinessTest; verify.py; browser,PARTIAL: common types; provider transfer explicitly rejected
+Configured validation,deterministic validators and rule_configs,rules; CoC preview,BusinessTest dry-run,PARTIAL: explanatory config; dynamic configuration engine absent
+Payments,BusinessService.split/schedule,payment schedules and detail,exactMoney; verify.py,PARTIAL: exact instalments; funding-run/waiver histories absent
+CSV imports,Commons CSV parser; jobs and rows,imports/results/export,verify.py; component handling,PARTIAL: quoted rows; crash recovery/progress polling absent
+Publisher and integrations,OutboxSimulator; ExternalReceiver; LocalIntegrationSimulator,operations; durable outbox,API workflow; processed events,"PARTIAL: named simulators; broker adapter, replay UI and failure-load tests absent"
+Reports and operations,BusinessController reports; CatalogueController ops,summary reports; masked ops,role-denial tests and verify.py,PARTIAL: aggregate report; detailed negative-balance/remittance absent
+Knowledge and AI,"KnowledgeStore, ChatTurns, ModelGateway, BusinessTools",chat/sources/catalogue/architecture,6 unit tests; live pgvector/API/browser,PARTIAL: actual retrieval; live OpenAI and full evaluation unverified

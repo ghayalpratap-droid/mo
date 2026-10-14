@@ -1,0 +1,24 @@
+sequenceDiagram
+ participant UI as React portal or local scheduler
+ participant API as Controller
+ participant Service as Service and deterministic rules
+ participant DB as Relational database
+ participant Sim as Named local receiver
+ UI->>API: Scheduled outbox dispatch
+ API->>API: Locked pending event rows
+ alt Unauthorized or stale version
+  API-->>UI: 403 or 404 or 409
+ else Authorized request
+  API->>Service: Validated request DTO
+  Service->>Service: Receiver budget and idempotent processed event
+  alt Validation failure
+   Service-->>UI: 400 or 422 or explicit REJECTED decision
+  else Valid or recorded rejection
+   Service->>DB: Delivered or bounded backoff or DEAD
+   DB-->>Service: Transaction committed
+   Service-->>UI: Response DTO and refreshed history
+   DB-->>Sim: Durable outbox event on dispatch
+   Sim-->>DB: Processed event or bounded retry
+  end
+ end
+

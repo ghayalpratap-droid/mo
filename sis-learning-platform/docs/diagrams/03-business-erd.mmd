@@ -1,0 +1,24 @@
+erDiagram
+ providers ||--o{ applications : owns
+ students ||--o{ applications : identifies
+ applications ||--|| tuition_periods : covers
+ tuition_periods ||--|| tuition_finance_details : finances
+ tuition_periods ||--o{ tuition_period_histories : snapshots
+ applications ||--o{ histories : records
+ applications ||--o{ cocs : changes
+ applications ||--o{ instalments : schedules
+ applications ||--o{ outbox_events : emits
+ applications {
+  uuid id PK
+  string provider FK
+  decimal fee
+  string currency
+  long version
+ }
+ cocs {
+  uuid id PK
+  uuid application_id FK
+  string type
+  string status
+ }
+

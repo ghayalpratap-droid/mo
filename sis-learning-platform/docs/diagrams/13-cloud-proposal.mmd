@@ -1,0 +1,10 @@
+flowchart TB
+ Browser[Portal browser] --> Edge[TLS ingress and OIDC]
+ Edge --> Domain[Domain containers]
+ Edge --> Knowledge[Knowledge containers]
+ Domain --> DB[(Managed PostgreSQL business)]
+ Knowledge --> KDB[(Managed PostgreSQL pgvector)]
+ Knowledge --> Egress[Controlled model egress]
+ Egress --> Model[OpenAI configured endpoint]
+ Domain --> Broker[Optional RabbitMQ target adapter]
+

@@ -1,0 +1,20 @@
+erDiagram
+ source_files ||--o{ documents : versions
+ source_files {
+  uuid id PK
+  uuid active_version
+  string provider
+  string audience
+  boolean deleted
+ }
+ documents ||--o{ document_chunks : splits
+ document_chunks ||--|| embeddings : encodes
+ documents ||--o{ code_relations : describes
+ document_chunks ||--o{ message_sources : cites
+ chat_messages ||--o{ message_sources : records
+ embeddings {
+  uuid id PK
+  vector embedding
+  string model
+ }
+

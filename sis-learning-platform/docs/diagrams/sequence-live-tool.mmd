@@ -1,0 +1,20 @@
+sequenceDiagram
+ participant UI as Portal question
+ participant K as Knowledge service
+ participant Tool as BusinessTools
+ participant B as Domain API
+ participant DB as Business schema
+ UI->>K: Latest attendance status UUID
+ K->>Tool: Typed applicationSummary with server identity
+ Tool->>B: Bearer authenticated GET summary
+ B->>B: Verify role and object provider
+ alt Wrong provider
+  B-->>Tool: 404 hidden object
+ else Allowed
+  B->>DB: Read authoritative current state
+  DB-->>B: Confirmation status
+  B-->>Tool: Masked status source and timestamp
+  Tool-->>K: Live facts
+  K-->>UI: Live fact distinct from document citations
+ end
+

@@ -1,0 +1,24 @@
+sequenceDiagram
+ participant UI as React portal or local scheduler
+ participant API as Controller
+ participant Service as Service and deterministic rules
+ participant DB as Relational database
+ participant Sim as Named local receiver
+ UI->>API: Confirm attendance
+ API->>API: Confirmation DTO provider and version
+ alt Unauthorized or stale version
+  API-->>UI: 403 or 404 or 409
+ else Authorized request
+  API->>Service: Validated request DTO
+  Service->>Service: Registration prerequisite
+  alt Validation failure
+   Service-->>UI: 400 or 422 or explicit REJECTED decision
+  else Valid or recorded rejection
+   Service->>DB: Attendance status history and outbox to BAS simulator
+   DB-->>Service: Transaction committed
+   Service-->>UI: Response DTO and refreshed history
+   DB-->>Sim: Durable outbox event on dispatch
+   Sim-->>DB: Processed event or bounded retry
+  end
+ end
+

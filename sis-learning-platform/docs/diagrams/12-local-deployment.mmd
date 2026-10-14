@@ -1,0 +1,11 @@
+flowchart TB
+ Host[Developer host with Java 21 Node Docker]
+ Host --> Vite[Vite 5174]
+ Host --> Domain[Domain 8091]
+ Host --> Knowledge[Knowledge 8092]
+ Domain --> H2[(H2 persistent file local or offline)]
+ Domain -.->|integration profile| PG[(PostgreSQL 5544)]
+ Knowledge --> PG
+ PG --> Vector[pgvector 0.8.1]
+ Knowledge -.->|local real-model profile| OpenAI[OpenAI API]
+

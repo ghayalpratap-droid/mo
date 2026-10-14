@@ -1,0 +1,19 @@
+sequenceDiagram
+ participant UI as React portal
+ participant API as ChatTurns
+ participant DB as Knowledge schema
+ participant Model as Model adapter
+ UI->>API: Authenticated POST streaming question
+ API->>DB: Check session owner and claim active turn
+ API->>DB: Retrieve active authorized vector and keyword candidates
+ API->>Model: Masked question memory and untrusted evidence
+ Model-->>API: Answer with citation IDs
+ API->>DB: Recheck citation access
+ API-->>UI: Validated buffered deltas
+ API->>DB: Completed messages and citation provenance
+ API-->>UI: Completion envelope
+ alt Cancellation or failure
+  API->>DB: CANCELLED FAILED or INTERRUPTED
+  API-->>UI: Failure or partial state
+ end
+

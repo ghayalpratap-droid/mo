@@ -1,0 +1,3 @@
+pluginManagement { repositories { gradlePluginPortal(); mavenCentral() } }
+rootProject.name = 'sis-learning-platform'
+include 'backend:shared', 'backend:sis-domain-service', 'backend:sis-knowledge-service'

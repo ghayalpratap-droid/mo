@@ -1,0 +1,1115 @@
+source_class,table,documentary_context,heading,start_line,end_line,definition,classification,limitation
+3,BCF,3.6 PG CoC → BCF and PG auto-withdrawal,3.6 PG CoC → BCF and PG auto-withdrawal,333,355,"### 3.6 PG CoC → BCF and PG auto-withdrawal
+```mermaid
+sequenceDiagram
+  participant SCH as Scheduler / AutoWithdrawalScheduler
+  participant C as pg-coc Controller
+  participant BJ as BatchJob.run
+  participant SP as KIFPK032.p_get_pgl_coc_records
+  participant BCF as BCF (Optimus)
+  participant AW as PgCocAutoWithdrawalService.process
+  participant AQ as AQ XXAQ_COC_DSF_JMS_TXT_Q
+  SCH->>C: POST /runCocBatch
+  C->>BJ: run()
+  BJ->>SP: getListOfPgCocProcessData(""PGM_AUTO_COC"")
+  BJ->>BCF: BcfClient.authenticate() /session
+  loop each record
+    BJ->>BCF: invokeBCFSISCoCService
+    BJ->>SP: p_call_back_response(S/DF/AF)
+  end
+  SCH->>AW: cron
+  AW->>AW: create WITHDRAWAL CoC, histories
+  AW->>AQ: CocWithdrawalOAQservice.sendCocDataToOAQ
+```
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+XxslProtocolProperties,XXSL_PROTOCOL_PROPERTIES,3.2 sis-coc-service,XxslProtocolProperties → XXSL_PROTOCOL_PROPERTIES,3291,3296,"#### XxslProtocolProperties → XXSL_PROTOCOL_PROPERTIES
+| Field | Column | Type | Notes |
+|---|---|---|---|
+| xsslProtocolPropertiesId | PROPERTY + set_name | XsslProtocolPropertiesId | `@EmbeddedId` |
+| value | VALUE | String | |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultTuitionPeriod,TUITION_PERIODS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultTuitionPeriod → TUITION_PERIODS,3472,3539,"### DefaultTuitionPeriod → TUITION_PERIODS
+- **Id:** ID (seq `XXSS_TUP_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+- **Extends:** AbstractTuitionPeriod.
+
+| Field | Column | Type |
+|---|---|---|
+| attendanceNotificationId | ATTENDANCE_NOTIFICATION_ID | Long |
+| startDate | START_DATE | Date nn |
+| endDate | END_DATE | Date |
+| feeRevision | FEE_REVISION_IND | hei.rc.h.FeeRevisionEnumType nn |
+| classHandshake | CLASS_HANDSHAKE | Date |
+| changeSource | CHANGE_SOURCE | hei.rc.h.ChangeSourceEnumType |
+| cocId | COC_ID | Long |
+| autoCocInd | AUTO_COC_IND | yes_no |
+| specialLocation | ALTERNATIVE_LOCATION_TYPE | sis.rc.h.OtherLocationEnumType |
+| fsnStatus | FSN_STATUS_TYPE | sis.rc.h.FSNStatusEnumType nn |
+| studentStatus | STUDENT_STATUS_TYPE | String nn |
+| transferCode | TRANSFER_CODE | sis.rc.h.TransferCodeEnumType |
+| bursaryApproved | APPROVED_BURSARY_IND | yes_no nn |
+| cocReminderStatus | COC_REMINDER_STATUS_TYPE | sis.rc.h.CocReminderStatusEnumType |
+| studentUcasIdentifier | STUDENT_UCAS_ID | String |
+| bankDetailsHeld | BANK_DETAILS_HELD_IND | yes_no nn |
+| externalTransfer | EXTERNAL_TRANSFER_IND | yes_no nn |
+| internalTransfer | INTERNAL_TRANSFER_IND | yes_no nn |
+| reassessed | REASSESSED_IND | yes_no nn |
+| paymentMade | PAYMENT_MADE_IND | yes_no nn |
+| cohort | STUDENT_COHORT_CATEGORY_TYPE | hei.rc.h.StudentCohortCategoryTypeEnumType |
+| modeOfStudy | MODE_OF_STUDY | rc.h.ModeOfStudyEnumType |
+| currentAcademicYearCourseStartDate | CURRENT_ACY_COURSE_START_DATE | Date |
+| changeEffectiveDate | CHANGE_EFFECTIVE_DATE | Date |
+| loanAppliedFor | LOAN_APPLIED_FOR | String |
+| heiCode | COL_HEI_CODE | String nn |
+| customerId | CSR_ID | Long nn |
+| slcCourseCode | CRS_COURSE_CODE | Long nn |
+| hesAcademicYearId | HAY_ID | Long nn |
+| courseYear | COURSE_YEAR | Long nn |
+| tuitionFeeAmount | COURSE_FEE_AMOUNT | big_decimal nn |
+| tuitionFeeLoan | TUITION_FEE_LOAN_AMOUNT | big_decimal nn |
+| tuitionFeeGrant | TUITION_FEE_GRANT_AMOUNT | big_decimal nn |
+| tuitionFeeLiability | TUITION_FEE_PAYABLE_AMOUNT | big_decimal nn |
+| tuitionFeeWaiverAmount | FEE_WAIVER_PROCESSED_AMOUNT | big_decimal |
+| maintenanceLoanAmount | MAINTENANCE_LOAN_AMOUNT | big_decimal |
+| maintenanceGrantAmount | MAINTENANCE_GRANT_AMOUNT | big_decimal |
+| workStage | WORK_STAGE | sis.rc.h.WorkStageEnumType |
+| autoWithdrawalStatus | AUTO_WITHDRAWAL_STATUS | sis.rc.h.AutoWithdrawalStateEnumType |
+| tuitionFeeLiabilitySchedule1/2/3 | TF_LIABILITY_SCHEDULE_IND_1/2/3 | String(1) |
+| assessmentType | ELIG_ASSESSMENT_TYPE | sis.rc.h.AssessmentTypeEnumType |
+| chtId | CHT_ID | Long |
+| rejectedInd | REJECTED_IND | sis.rc.h.RejectedEnumType |
+| multipleAcademicYear | MULTIPLE_ACADEMIC_YEAR | Integer |
+| clientId | PNS_ID | Long |
+| source | SOURCE | sis.rc.h.SourceEnumType |
+| blockManualRegReason | BLOCK_MANUAL_REG_REASON_TYPE | sis.rc.h.BlockManualRegReasonEnumType |
+| failureReason | FAILURE_REASON | String |
+| deletedAsmntInd | DELETED_ASSESSMENT_IND | yes_no |
+| withdrawReasonType | WITHDRAWAL_REASON_TYPE | sis.rc.h.WithdrawReasonTypeEnumType |
+| compellingReasonInd | COMPELLING_REASON_IND | yes_no |
+| handlerId | NOTIFICATION_HANDLER_TYPE | Integer |
+| auditInfo | audit cols | HAuditInfo |
+| application | TPA_ID | many-to-one DefaultTuitionPeriodApplication |
+| defaultRegistrationConfirmationRequest | RCR_ID | many-to-one DefaultRegistrationConfirmationRequest |
+| attendanceConfirmationRequests | key TUP_ID | bag → DefaultAttendanceConfirmationRequest |
+| postGraduateConfirmationRequest | property-ref tuitionPeriod | one-to-one DefaultPostGraduateConfirmationRequest |
+| histories | key TUP_ID | bag → DefaultTuitionPeriodHistory |
+| edsCancellationLogs | key TUP_ID | bag → EdsCancellationLogs |
+| tuitionFinanceDetail | property-ref tuitionPeriod | one-to-one DefaultTuitionFinanceDetail |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultTuitionPeriodHistory,TUITION_PERIOD_HISTORIES,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultTuitionPeriodHistory → TUITION_PERIOD_HISTORIES,3540,3552,"### DefaultTuitionPeriodHistory → TUITION_PERIOD_HISTORIES
+- **Id:** ID (seq `XXSS_TPH_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+- **Columns:** every column of TUITION_PERIODS above, with the same names and types, plus auditInfo.
+
+| Relation | Column | Type |
+|---|---|---|
+| application | TPA_ID | many-to-one DefaultTuitionPeriodApplication |
+| defaultTuitionPeriod | TUP_ID | many-to-one DefaultTuitionPeriod |
+| events | key TPH_ID | bag → DefaultEvent |
+| defaultRegistrationConfirmationRequest | RCR_ID | many-to-one |
+| tuitionFinanceHistory | property-ref tuitionPeriodHistory | one-to-one DefaultTuitionFinanceHistory |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultTuitionPeriodApplication,TUITION_PERIOD_APPLICATIONS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultTuitionPeriodApplication → TUITION_PERIOD_APPLICATIONS,3553,3565,"### DefaultTuitionPeriodApplication → TUITION_PERIOD_APPLICATIONS
+Id: ID (seq `XXSS_TPA_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| externalId | EXTERNAL_ID | Long |
+| applicationSource | APPLICATION_SOURCE_TYPE | sis.rc.h.ApplicationSourceEnumType nn |
+| sourceApplicationId | SOURCE_APPLICATION_REFERENCE | String |
+| acyId | ACY_ID | Long |
+| ruleConfigAttribute | RCA_ID | many-to-one RuleConfigAttributes |
+| auditInfo | audit cols | HAuditInfo |
+| tuitionPeriods | key TPA_ID | bag → DefaultTuitionPeriod |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultXxssApplications,XXSS_APPLICATIONS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultXxssApplications → XXSS_APPLICATIONS,3566,3577,"### DefaultXxssApplications → XXSS_APPLICATIONS
+Id: ID (seq `XXSS_APN_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| applicationStatusType | APPLICATION_STATUS_TYPE | sis.rc.h.ApplicationStatusEnumType nn |
+| changeEffectiveDate | CHANGE_EFFECTIVE_DATE | Date nn |
+| colHeiCode | COL_HEI_CODE | String nn |
+| csrId | CSR_ID | Long nn |
+| sourceApplicationId | SOURCE_APPLICATION_REFERENCE | String nn |
+| courseEndDate | COURSE_END_DATE | Date nn |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultTuitionFinanceDetail,TUITION_FINANCE_DETAILS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultTuitionFinanceDetail → TUITION_FINANCE_DETAILS,3578,3588,"### DefaultTuitionFinanceDetail → TUITION_FINANCE_DETAILS
+Id: ID (seq `XXSS_TFD_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| currentAyCourseCredits | CURRENT_AY_COURSE_CREDITS | Integer |
+| childCareGrantInd | CHILD_CARE_GRANT_IND | yes_no |
+| tuitionPeriod | TUP_ID | many-to-one DefaultTuitionPeriod nn |
+| tuitionFinanceHistories | key TFD_ID | bag → DefaultTuitionFinanceHistory |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultTuitionFinanceHistory,TUITION_FINANCE_HISTORIES,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultTuitionFinanceHistory → TUITION_FINANCE_HISTORIES,3589,3599,"### DefaultTuitionFinanceHistory → TUITION_FINANCE_HISTORIES
+Id: ID (seq `XXSS_TFS_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| currentAyCourseCredits | CURRENT_AY_COURSE_CREDITS | Integer |
+| childCareGrantInd | CHILD_CARE_GRANT_IND | yes_no |
+| tuitionFinanceDetail | TFD_ID | many-to-one nn |
+| tuitionPeriodHistory | TPH_ID | many-to-one nn |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+RuleConfigAttributes,RULE_CONFIG_ATTRIBUTES,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),RuleConfigAttributes (`ruleconfig.api.data`) → RULE_CONFIG_ATTRIBUTES,3600,3610,"### RuleConfigAttributes (`ruleconfig.api.data`) → RULE_CONFIG_ATTRIBUTES
+Id: ID (seq `XXSS_RCA_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| studentCohort | STUDENT_COHORT_CATEGORY_TYPE | BigDecimal |
+| modeOfStudy | MODE_OF_STUDY | String |
+| source | SOURCE | String |
+| domicileType | DOMICILE_TYPE | Integer |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+PublisherConfigAttributes,PUBLISHER_CONFIG_ATTRIBUTES,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),PublisherConfigAttributes (`ruleconfig.api.data`) → PUBLISHER_CONFIG_ATTRIBUTES,3611,3622,"### PublisherConfigAttributes (`ruleconfig.api.data`) → PUBLISHER_CONFIG_ATTRIBUTES
+Id: ID (seq `XXSS_PCA_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| rcaId | RCA_ID | Long nn |
+| acyId | ACY_ID | Long |
+| messageType | MESSAGE_TYPE | String |
+| configurationMode | CONFIGURATION_MODE | String |
+| configClassInd | CONFIG_CLASS_IND | String |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultRegistrationConfirmationRequest,REGISTRATION_CONF_REQUESTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultRegistrationConfirmationRequest → REGISTRATION_CONF_REQUESTS,3623,3643,"### DefaultRegistrationConfirmationRequest → REGISTRATION_CONF_REQUESTS
+- **Id:** ID (seq `XXSS_RCR_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+
+| Field | Column | Type |
+|---|---|---|
+| hesAcademicYearId | HAY_ID | Long nn |
+| heiCode | COL_HEI_CODE | String nn |
+| customerId | CSR_ID | Long nn |
+| stateEnum | REGISTRATION_STATUS_TYPE | sis.rc.h.RegistrationStateTypeEnumType nn |
+| worklistDate | WORKLIST_DATE | Date nn |
+| confirmationDate | CONFIRMATION_DATE | Date |
+| code | REGISTRATION_CODE_TYPE | sis.rc.h.RegistrationCodeTypeEnumType |
+| courseCode | CRS_COURSE_CODE | Long |
+| manualRegistration | MANUAL_REGISTRATION_INDICATOR | yes_no |
+| creditCocInd | CREDIT_COC_IND | String nn |
+| guidReferenceId | GUID_REFERENCE | String (insert=false) |
+| auditInfo | audit cols | HAuditInfo |
+| histories | key RCR_ID | bag → DefaultRegistrationConfirmationRequestHistory |
+| tuitionPeriods | key RCR_ID | bag → DefaultTuitionPeriod |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultRegistrationConfirmationRequestHistory,REGISTRATION_CONF_REQ_HISTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultRegistrationConfirmationRequestHistory → REGISTRATION_CONF_REQ_HISTS,3644,3649,"### DefaultRegistrationConfirmationRequestHistory → REGISTRATION_CONF_REQ_HISTS
+- **Id:** ID (seq `XXSS_RCH_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+- **Columns:** same as REGISTRATION_CONF_REQUESTS but without GUID_REFERENCE: REGISTRATION_STATUS_TYPE, WORKLIST_DATE, CONFIRMATION_DATE, REGISTRATION_CODE_TYPE, CRS_COURSE_CODE, MANUAL_REGISTRATION_INDICATOR, HAY_ID, COL_HEI_CODE, CSR_ID, CREDIT_COC_IND, plus auditInfo.
+- **Relations:** defaultRegistrationConfirmation (RCR_ID, many-to-one) and events (key RCH_ID, bag → DefaultEvent).
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultPostGraduateConfirmationRequest,PGL_CONFIRMATION_REQUESTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultPostGraduateConfirmationRequest → PGL_CONFIRMATION_REQUESTS,3650,3667,"### DefaultPostGraduateConfirmationRequest → PGL_CONFIRMATION_REQUESTS
+- **Id:** ID (seq `XXSS_PCR_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+
+| Field | Column | Type |
+|---|---|---|
+| tuitionPeriod | TUP_ID | many-to-one nn |
+| heiCode | COL_HEI_CODE | String nn |
+| hesAcademicYearId | HAY_ID | Long nn |
+| period | PERIOD | Integer nn |
+| stateEnum | REGISTRATION_STATUS_TYPE | RegistrationStateTypeEnumType nn |
+| worklistDate | WORKLIST_DATE | Date nn |
+| confirmationDate | CONFIRMATION_DATE | Date |
+| code | REGISTRATION_CODE_TYPE | RegistrationCodeTypeEnumType |
+| guidReference | GUID_REFERENCE | String (insert=false) |
+| auditInfo | audit cols | HAuditInfo |
+| histories | key PCR_ID | bag → DefaultPostGraduateConfirmationRequestHistory |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultPostGraduateConfirmationRequestHistory,PGL_CONFIRMATION_REQUEST_HISTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultPostGraduateConfirmationRequestHistory → PGL_CONFIRMATION_REQUEST_HISTS (immutable),3668,3673,"### DefaultPostGraduateConfirmationRequestHistory → PGL_CONFIRMATION_REQUEST_HISTS (immutable)
+- **Id:** ID (seq `XXSS_PCH_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+- **Columns:** PERIOD, REGISTRATION_STATUS_TYPE, WORKLIST_DATE, CONFIRMATION_DATE, REGISTRATION_CODE_TYPE, COL_HEI_CODE, HAY_ID, plus auditInfo.
+- **Relations:** tuitionPeriod (TUP_ID), postGraduateConfirmationRequest (PCR_ID), events (key PCH_ID, bag → DefaultEvent).
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultAttendanceConfirmationRequest,ATTENDANCE_CONF_REQUESTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultAttendanceConfirmationRequest → ATTENDANCE_CONF_REQUESTS,3674,3696,"### DefaultAttendanceConfirmationRequest → ATTENDANCE_CONF_REQUESTS
+- **Id:** ID (seq `XXSS_ACQ_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+
+| Field | Column | Type |
+|---|---|---|
+| period | PERIOD | Integer nn |
+| stateEnum | ATTENDANCE_STATUS_TYPE | sis.rc.h.AttendanceStateEnumType nn |
+| worklistDate | WORKLIST_DATE | Date |
+| confirmationDate | CONFIRMATION_DATE | Date |
+| code | ATTENDANCE_CODE_TYPE | sis.rc.h.AttendanceCodeTypeEnumType |
+| classCode | CLASS_ATTENDANCE_CODE_TYPE | AttendanceCodeTypeEnumType |
+| saved | SAVED_IND | yes_no nn |
+| savedAndReassessed | SAVED_REASSESSED_IND | yes_no nn |
+| previouslyConfirmed | PREVIOUSLY_CONFIRMED_IND | yes_no nn |
+| previouslySuspended | PREVIOUSLY_SUSPENDED_IND | yes_no nn |
+| clawbackRequiredFrom | CLAWBACK_REQUIRED_FROM | Timestamp |
+| confirmationType | CONFIRMATION_TYPE | sis.rc.h.ImportFileTypeEnumType |
+| guidReferenceId | GUID_REFERENCE | String (insert=false) |
+| auditInfo | audit cols | HAuditInfo |
+| defaultTuitionPeriod | TUP_ID | many-to-one nn |
+| histories | key ACQ_ID | bag → DefaultAttendanceConfirmationRequestHistory |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultAttendanceConfirmationRequestHistory,ATTENDANCE_CONF_REQUEST_HISTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultAttendanceConfirmationRequestHistory → ATTENDANCE_CONF_REQUEST_HISTS (immutable),3697,3702,"### DefaultAttendanceConfirmationRequestHistory → ATTENDANCE_CONF_REQUEST_HISTS (immutable)
+- **Id:** ID (seq `XXSS_ACH_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+- **Columns:** same as ATTENDANCE_CONF_REQUESTS except GUID_REFERENCE, plus auditInfo.
+- **Relations:** defaultTuitionPeriod (TUP_ID), defaultAttendanceConfirmationRequest (ACQ_ID), eventAttendanceConfirmationRequestHistories (key ACH_ID).
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultEvent,EVENTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultEvent → EVENTS (immutable),3703,3714,"### DefaultEvent → EVENTS (immutable)
+Id: ID (seq `XXSS_EVE_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| eventTypeEnum | EVENT_TYPE | sis.rc.h.EventTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+| tuitionPeriodHistory | TPH_ID | many-to-one |
+| defaultRegistrationConfirmationHistory | RCH_ID | many-to-one |
+| defaultPostGraduateConfirmationHistory | PCH_ID | many-to-one |
+| eventAttendanceConfirmationRequestHistories | key EVE_ID | bag |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultEventAttendanceConfirmationRequestHistory,EVENT_CONF_REQUEST_HISTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultEventAttendanceConfirmationRequestHistory → EVENT_CONF_REQUEST_HISTS (immutable),3715,3719,"### DefaultEventAttendanceConfirmationRequestHistory → EVENT_CONF_REQUEST_HISTS (immutable)
+- **Id:** ID (seq `XXSS_ECH_ID_SEQ`).
+- **Columns:** auditInfo only.
+- **Relations:** defaultEvent (EVE_ID, nn) and defaultAttendanceConfirmationRequestHistory (ACH_ID, nn).
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+EdsCancellationLogs,EDS_CANCELLATION_LOGS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),EdsCancellationLogs → EDS_CANCELLATION_LOGS,3720,3730,"### EdsCancellationLogs → EDS_CANCELLATION_LOGS
+Id: ID (seq `XXSS_ECL_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| tupId | TUP_ID | Long nn |
+| edsPnsId | EDS_PNS_ID | Long |
+| workStage | WORK_STAGE | sis.rc.h.WorkStageEnumType |
+| auditInfo | audit cols | HAuditInfo |
+| tuitionPeriod | TUP_ID | many-to-one (read-only) |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+PglRejection,PAYMENT_REJECTION_NOTIFS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),PglRejection (`api.data`) → PAYMENT_REJECTION_NOTIFS,3731,3747,"### PglRejection (`api.data`) → PAYMENT_REJECTION_NOTIFS
+Id: ID (seq `XXSS_PRN_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| pnsId | PNS_ID | Long nn |
+| csrId | CSR_ID | Long nn |
+| academicYearId | ACY_ID | Long |
+| heiCode | COL_HEI_CODE | String |
+| courseCode | CRS_COURSE_CODE | String |
+| courseYear | COURSE_YEAR | Integer |
+| paymentNotificationType | PAYMENT_NOTIFICATION_TYPE | String |
+| failureReason | FAILURE_REASON | String |
+| failureDateTime | FAILURE_DATE_TIME | Date |
+| processedInd | PROCESSED_IND | yes_no |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+BulkFileSubmissionPOJO,BULK_FILE_SUBMISSIONS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),BulkFileSubmissionPOJO → BULK_FILE_SUBMISSIONS,3748,3767,"### BulkFileSubmissionPOJO → BULK_FILE_SUBMISSIONS
+- **Id:** ID (seq `BFS_ID_SEQ`).
+- **Named query:** `BulkFileSubmission.expired.by.todaysDate`.
+
+| Field | Column | Type |
+|---|---|---|
+| filename | FILENAME | String nn |
+| heiCode | HEI_CODE | String nn |
+| checksum | CHECKSUM | String |
+| numberOfRecords | NUMBER_OF_RECORDS | Integer nn |
+| lastRecordProcessed | LAST_RECORD_PROCESSED | Integer nn |
+| numberOfBlanks | NUMBER_BLANKS | Integer |
+| numberOfInvalid | NUMBER_INVALID | Integer |
+| importFileType | IMPORT_FILE_TYPE | sis.rc.h.ImportFileTypeEnumType nn |
+| importStatusType | IMPORT_STATUS_TYPE | sis.rc.h.ImportStatusTypeEnumType nn |
+| academicYear | ACY_ID | Long |
+| fileSubmitted | FILE_SUBMITTED_IND | sis.rc.h.ImportTypeEnumType nn |
+| auditInfo | audit cols | HAuditInfo |
+| uploadFileRecords | key BFS_ID | bag → DefaultFileImportRecord |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+DefaultFileImportRecord,STAGE_FILE_UPLOADS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),DefaultFileImportRecord → STAGE_FILE_UPLOADS,3768,3778,"### DefaultFileImportRecord → STAGE_FILE_UPLOADS
+- **Id:** ID (seq `xxss_sfu_id_seq`).
+- **Named queries:** `FileImportRecord.getHeader`, `getContent`, `getFooter`.
+
+| Field | Column | Type |
+|---|---|---|
+| sequenceNumber | RECORD_SEQUENCE_NUMBER | Long nn |
+| content | RECORD_DETAILS | String |
+| bulkFileSubmission | BFS_ID | many-to-one nn |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ImportResultPOJO,IMPORT_RESULTS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),ImportResultPOJO → IMPORT_RESULTS,3779,3790,"### ImportResultPOJO → IMPORT_RESULTS
+Id: ID (seq `XXSS_IMR_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| numberSuccessful | NUMBER_SUCCESSFUL | Integer nn |
+| numberFailed | NUMBER_FAILED | Integer nn |
+| bulkFileSubmissionId | BFS_ID | Long nn |
+| attendanceCodeType | ATTENDANCE_CODE_TYPE | AttendanceCodeTypeEnumType |
+| cocCategoryType | COC_CATEGORY_TYPE | sis.rc.h.CocCategoryTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ImportFailureDetailPOJO,IMPORT_FAILURE_DETAILS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),ImportFailureDetailPOJO → IMPORT_FAILURE_DETAILS,3791,3802,"### ImportFailureDetailPOJO → IMPORT_FAILURE_DETAILS
+Id: ID (seq `XXSS_IFD_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| fileRecordNumber | FILE_RECORD_NUMBER | Long |
+| importFailureReasonType | IMPORT_FAILURE_REASON_TYPE | sis.rc.h.ImportFailureReasonTypeEnumType nn |
+| bulkFileSubmissionId | BFS_ID | Long nn |
+| importFailureType | IMPORT_FAILURE_TYPE | sis.rc.h.ImportFailureTypeEnumType nn |
+| studentSupportNumber | STUDENT_SUPPORT_NUMBER | String |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ImportCocFailureDetailPOJO,IMPORT_COC_FAILURE_DETAILS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),ImportCocFailureDetailPOJO → IMPORT_COC_FAILURE_DETAILS,3803,3814,"### ImportCocFailureDetailPOJO → IMPORT_COC_FAILURE_DETAILS
+Id: ID (seq `XXSS_ICF_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| bulkFileSubmissionId | BFS_ID | Long nn |
+| fileRecordNumber | FILE_RECORD_NUMBER | Long |
+| studentSupportNumber | STUDENT_SUPPORT_NUMBER | String |
+| importFailureType | IMPORT_FAILURE_TYPE | ImportFailureTypeEnumType nn |
+| importCocFailureReason | IMPORT_COC_FAILURE_REASON | String nn |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HebssNotificationStagesPojo,HEBSS_NOTIFICATION_STGS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),HebssNotificationStagesPojo → HEBSS_NOTIFICATION_STGS,3815,3828,"### HebssNotificationStagesPojo → HEBSS_NOTIFICATION_STGS
+Id: ID (seq `XXSS_HNS_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| acqId | ACQ_ID | Long |
+| rcrId | RCR_ID | Long |
+| classPublishStatusType | CLASS_PUBLISH_STATUS_TYPE | Integer |
+| sendToHebssInd | SENT_TO_HEBSS_IND | String |
+| sourceApplicationId | SOURCE_APPLICATION_REFERENCE | String nn |
+| confirmationDate | CONFIRMATION_DATE | Date |
+| attendanceCodeType | ATTENDANCE_CODE_TYPE | AttendanceCodeTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+AdditionalCustomerDetailPOJO,ADDITIONAL_CUSTOMER_DETAILS,4.1 sis-data-service (package `uk.co.slc.hei.sis.data.service.data`),AdditionalCustomerDetailPOJO → ADDITIONAL_CUSTOMER_DETAILS,3829,3848,"### AdditionalCustomerDetailPOJO → ADDITIONAL_CUSTOMER_DETAILS
+- **Composite id:** `AdditionalCustomerDetailPK` (CSR_ID Long, ACY_ID Long).
+- **Named query:** `AdditionalCustomerDetail.forCustomerId`.
+
+| Field | Column | Type |
+|---|---|---|
+| numberOfSponsors | NUMBER_OF_SPONSORS | Long |
+| sponsorOneConsent | SPONSOR1_CONSENT_IND | String nn |
+| sponsorTwoConsent | SPONSOR2_CONSENT_IND | String nn |
+| studentBursaryConsent | STUDENT_CONSENT_IND | String nn |
+| ccgSupportIndicator | CCG_SUPPORT_IND | String nn |
+| nhsBursaryIndicator | NHS_BURSARY_IND | String nn |
+| cohortYear | COHORT_YEAR | Long |
+| leaCode | AWA_LEA_CODE | String nn |
+| erasmusSchemeFlag | ERASMUS_SCHEME_FLAG | String(1) |
+| abroadPlacementFlag | ABROAD_PLACEMENT_FLAG | String(1) |
+| abroadPaidPlacementFlag | ABROAD_PAID_PLACEMENT_FLAG | String(1) |
+| auditInfo | audit cols | HAuditInfo |
+| awardAuthority | AWA_LEA_CODE | many-to-one `commonstakeholder.api.data.AwardAuthority` |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CocPOJO,COCS,4.2 sis-coc-data-service (package `uk.co.slc.hei.sis.coc.data.service.data`),CocPOJO → COCS (single-table inheritance),3851,3911,"### CocPOJO → COCS (single-table inheritance)
+- **Discriminator:** COC_CATEGORY_TYPE.
+- **Id:** ID (seq `COC_ID_SEQ`).
+- **Version:** VERSION_NUMBER.
+
+| Field | Column | Type |
+|---|---|---|
+| heiCode | COL_HEI_CODE | String nn |
+| cocCategoryType | COC_CATEGORY_TYPE | CocCategoryTypeEnumType (read-only) |
+| cocStatusType | COC_STATUS_TYPE | sis.rc.h.CocStatusTypeEnumType nn |
+| studentSupportNumber | STUDENT_SUPPORT_NUMBER | String nn |
+| academicApproval | ACADEMIC_APPROVAL | yes_no |
+| academicYear | ACADEMIC_YEAR | Integer |
+| bulkFileSubmissionId | BFS_ID | Long |
+| contactId | HCO_ID | Long |
+| courseCode | CRS_COURSE_CODE | Long |
+| courseEndDate | COURSE_END_DATE | Date |
+| courseName | COURSE_NAME | String |
+| courseYearType | COURSE_YEAR_TYPE | sis.rc.h.CocCourseYearTypeEnumType |
+| customerId | CSR_ID | Long |
+| dateOfBirth | DATE_OF_BIRTH | calendar_date |
+| dateLastAttended | DATE_LAST_ATTENDED | Date |
+| dateStudentLeftCourse | DATE_STUDENT_LEFT_COURSE | Date |
+| forenames | FORENAMES | String |
+| furtherExplanation | FURTHER_EXPLANATION | String |
+| hesAcademicYearId | HAY_ID | Long |
+| methodOfAttendance | METHOD_OF_ATTENDANCE | hei.rc.h.AttendanceMethodTypeEnumType |
+| otherCourseYear | OTHER_COURSE_YEAR | String |
+| surname | SURNAME | String |
+| tuitionFeeAmount | TUITION_FEE_AMOUNT | Double |
+| tuitionLiabilityAmount | TUITION_LIABILITY_AMOUNT | Double |
+| ucasCourseCode | UCAS_COURSE_CODE | String |
+| attendanceCode | ATTENDANCE_CODE_TYPE | AttendanceCodeTypeEnumType |
+| modeOfStudy | MODE_OF_STUDY | rc.h.ModeOfStudyEnumType |
+| levelOfFunding | LEVEL_OF_FUNDING_TYPE | sis.rc.h.LevelOfStudyEnumType nn |
+| courseCodeFrom | CRS_COURSE_CODE_ON_SUBMISSION | Long |
+| tpAppId | TPA_ID | Long |
+| currentAyCourseCredits | CURRENT_AY_COURSE_CREDITS | Long |
+| cocStageDetails | key COC_ID | bag → CocStageDetails |
+| auditInfo | audit cols | HAuditInfo |
+
+**COC subclasses** (discriminator value, extra columns):
+
+| Subclass (value) | Extra fields → columns |
+|---|---|
+| WithdrawalCocPOJO (1) | withdrawReasonType → WITHDRAWAL_REASON_TYPE |
+| SuspensionCocPOJO (2) | dateOfReturn → DATE_OF_RETURN; originalDurationOfCourse → ORIGINAL_DURATION_OF_COURSE; suspensionReasonType → SUSPENSION_REASON_TYPE |
+| ResumptionCocPOJO (3) | dateOfResumption → DATE_OF_RESUMPTION; resumptionConditions → RESUMPTION_CONDITIONS; resumptionConditionType → RESUMPTION_CONDITION_TYPE; resumptionPlacementDetails → RESUMPTION_PLACEMENT_DETAILS |
+| RepetitionCocPOJO (4) | mainReasonsToRepeat → MAIN_REASONS_TO_REPEAT; periodCourseToRepeat → PERIOD_COURSE_TO_REPEAT; repeatFromDate → REPEAT_FROM_DATE; repeatToDate → REPEAT_TO_DATE |
+| TransferCocPOJO (5) | approvalDate → APPROVAL_DATE; firstDateOfAttendance → FIRST_DATE_OF_ATTENDANCE; heiCodeTransferInto → COL_HEI_CODE_TRANSFER_INTO; transferType → TRANSFER_TYPE; heiName → HEI_NAME; heiUcasCode → HEI_UCAS_CODE; importHeiCode → IMPORT_HEI_CODE; ChangeReason → CHANGE_REASON_TYPE; currentAcyCourseStartDate → CURRENT_ACY_COURSE_START_DATE; transferReason → TRANSFER_REASON_TYPE |
+| FeeChangeCocPOJO (6) | ChangeReason → CHANGE_REASON_TYPE |
+| ReminderCocPOJO (7) | – |
+| FeeWaiverCocPOJO (8) | feeWaiverApprovedAmount → FEE_WAIVER_APPROVED_AMOUNT |
+| CourseTransferCocPOJO (10) | Same as TransferCoc, without transferReason |
+| ProviderTransferCocPOJO (11) | Same as CourseTransferCoc |
+| CreditCocPOJO (12) | ChangeReason → CHANGE_REASON_TYPE |
+| CrossAYTransferCocPOJO (13) | Same as CourseTransferCoc |
+| ThesisSubmissionCocPOJO (14) | thesisSubmissionDate → THESIS_SUBMISSION_DATE |
+
+`CreditChangeCocPOJO.java` exists but is not mapped.
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CocStageDetails,COC_STAGE_DETAILS,4.2 sis-coc-data-service (package `uk.co.slc.hei.sis.coc.data.service.data`),CocStageDetails → COC_STAGE_DETAILS,3912,3938,"### CocStageDetails → COC_STAGE_DETAILS
+Id: ID (seq `XXSS_CSD_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| customerId | CSR_ID | Long |
+| academicYearId | ACY_ID | Long nn |
+| heiCode | COL_HEI_CODE | String nn |
+| courseCode | CRS_COURSE_CODE | Long |
+| courseYear | COURSE_YEAR | Long |
+| deletedCocInd | DELETED_COC_IND | yes_no |
+| changeSource | CHANGE_SOURCE | hei.rc.h.ChangeSourceEnumType |
+| cocCreated | COC_CREATED_DATE_TIME | Timestamp |
+| cocUpdated | COC_UPDATED_DATE_TIME | Timestamp |
+| assessmentHistoryCreated | ASSESSMENT_HIST_CREATED_DATE | Timestamp |
+| assessmentHistoryUpdated | ASSESSMENT_HIST_UPDATED_DATE | Timestamp nn |
+| changeType | CHT_ID | sis.rc.h.ChangeTypeEnumType nn |
+| autoCocInd | AUTO_COC_IND | yes_no |
+| reasonCode | REASON_CODE | String |
+| eligabilityAssessmentType | ELIG_ASSESSMENT_TYPE | AssessmentTypeEnumType |
+| workstage | WORK_STAGE | Integer nn |
+| sisCocFailureReason | COC_FAILURE_REASON_CODE | Integer |
+| cocStatusType | COC_STATUS_TYPE | Integer nn |
+| tpAppId | TPA_ID | Long |
+| coc | COC_ID | many-to-one CocPOJO nn |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CocNotificationMessage,COC_NOTIFICATIONS,4.2 sis-coc-data-service (package `uk.co.slc.hei.sis.coc.data.service.data`),CocNotificationMessage → COC_NOTIFICATIONS,3939,3952,"### CocNotificationMessage → COC_NOTIFICATIONS
+Id: ID (seq `XXSS_CCN_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| cocCategoryType | COC_CATEGORY_TYPE | CocCategoryTypeEnumType nn |
+| customerId | CSR_ID | Long nn |
+| academicYearId | ACY_ID | Integer nn |
+| heiCode | COL_HEI_CODE | String nn |
+| slcCourseCode | SLC_COURSE_CODE | Long nn |
+| courseYear | COURSE_YEAR | Integer nn |
+| feeWaiverApprovedAmount | FEE_WAIVER_APPROVED_AMOUNT | Double |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ServiceBankAccountUsageTypePOJO,SERVICE_BANK_USAGES,5.1 hei-bank-details-hibernate-service (`uk.co.slc.hei.heibankdetails.service.data`),ServiceBankAccountUsageTypePOJO → SERVICE_BANK_USAGES,4013,4022,"### ServiceBankAccountUsageTypePOJO → SERVICE_BANK_USAGES
+- **Id:** ID (assigned).
+- **Named query:** `ServiceBankAccountUsageType.getAll`.
+
+| Field | Column | Type |
+|---|---|---|
+| serviceTypeEnum | SERVICE_TYPE | ServiceTypeEnumType |
+| bankAccountUsageTypeEnum | BANK_ACCOUNT_USAGE_TYPE | BankAccountUsageTypeEnumType |
+| createdBy / createdOn / updatedBy / updatedOn | CREATED_BY / CREATED_DATE_TIME / LAST_UPDATED_BY / LAST_UPDATED_DATE_TIME | string / date |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HEIBankUsagePOJO,HEI_SERVICE_BANK_ACCOUNTS,5.1 hei-bank-details-hibernate-service (`uk.co.slc.hei.heibankdetails.service.data`),HEIBankUsagePOJO → HEI_SERVICE_BANK_ACCOUNTS,4023,4034,"### HEIBankUsagePOJO → HEI_SERVICE_BANK_ACCOUNTS
+- **Id:** ID (seq `HSB_ID_SEQ`).
+- **Named queries:** `HEIBankUsages.searchByHeiBankDetailsId`, `searchForOverlap`.
+
+| Field | Column | Type |
+|---|---|---|
+| heiBankDetailsPOJO | HBA_ID | many-to-one HEIBankDetailsPOJO |
+| serviceBankAccountUsageTypePOJO | SBU_ID | many-to-one |
+| effectiveFrom | EFFECTIVE_FROM_DATE | date |
+| effectiveTo | EFFECTIVE_TO_DATE | date |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HEIBankDetailsPOJO,HEI_BANK_ACCOUNTS,5.1 hei-bank-details-hibernate-service (`uk.co.slc.hei.heibankdetails.service.data`),HEIBankDetailsPOJO → HEI_BANK_ACCOUNTS,4035,4049,"### HEIBankDetailsPOJO → HEI_BANK_ACCOUNTS
+- **Id:** ID (seq `HBA_ID_SEQ`).
+- **Named queries:** `HEIBankDetails.searchByHEICode`, `fetchById`.
+
+| Field | Column | Type |
+|---|---|---|
+| accountHolderName | ACCOUNT_HOLDERNAME | string |
+| sortCode | FBR_SORT_CODE | long |
+| accountNumber | ACCOUNT_NUMBER | long |
+| rollNumber | ROLL_NUMBER | string |
+| accountCodeType | ACCOUNT_CODE_TYPE | string |
+| HEICode | COL_HEI_CODE | string |
+| auditInfo | audit cols | HAuditInfo |
+| bankUsages | key HBA_ID | set → HEIBankUsagePOJO |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+Qualification,QUALIFICATIONS,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),Qualification → QUALIFICATIONS,4052,4061,"### Qualification → QUALIFICATIONS
+Id: ID (seq `QUA_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| code | QUALIFICATION_CODE | String(8) |
+| description | DESCRIPTION | String(30) |
+| activeInd | ACTIVE_IND | yes_no |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HeiLocation,XXSL_HEI_LOCNS,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),HeiLocation → XXSL_HEI_LOCNS,4062,4089,"### HeiLocation → XXSL_HEI_LOCNS
+Id: LOCN_ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| startDate | START_DATE | Timestamp nn |
+| name | NAME | String(32) nn |
+| locnType | LOCN_TYPE | String(1) nn |
+| createUser | CREATE_USER | String(30) nn |
+| createDate | CREATE_DATE | Timestamp nn |
+| addrLine1..addrLine5 | ADDR_LINE_1..ADDR_LINE_5 | String(60) (line 1 nn) |
+| activeInd | ACTIVE_IND | String(1) nn |
+| updateUser | UPDATE_USER | String(30) |
+| updateDate | UPDATE_DATE | Timestamp |
+| postCode | POST_CODE | String(8) |
+| phoneNum | PHONE_NUM | String(20) |
+| faxNum | FAX_NUM | String(60) |
+| endDate | END_DATE | Timestamp |
+| emailAddress | EMAIL_ADDRESS | String(60) |
+| colHeiCode | COL_HEI_CODE | String(4) nn |
+| deliveryPointSuffix | DELIVERY_POINT_SUFFIX | String(2) |
+| rm4sccCheckChar | RM4SCC_CHECK_CHAR | String(1) |
+| mailsortCode | MAILSORT_CODE | String(5) |
+| pafMatched | PAF_MATCHED | String(1) |
+| campusId | CAMPUS_ID | String(2) |
+| bacsFirstParticipation | BACS_FIRST_PARTICIPATION | String(1) |
+| rescheduleInd | RESCHEDULE_IND | String(1) |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+FranchiseAddress,XXSL_FRANCHISE_ADDRESSES,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),FranchiseAddress → XXSL_FRANCHISE_ADDRESSES,4090,4099,"### FranchiseAddress → XXSL_FRANCHISE_ADDRESSES
+Id: ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| campusId | CAMPUS_ID | String(2) |
+| name | NAME | String(32) nn |
+| colHeiCode | COL_HEI_CODE | String(4) nn |
+| endDate | END_DATE | Timestamp |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+Customer,XXSL_CUSTOMERS,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),Customer → XXSL_CUSTOMERS,4100,4158,"### Customer → XXSL_CUSTOMERS
+Id: ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| aliasId | ALIAS_ID | String(15) nn |
+| partyId | PARTY_ID | Long |
+| maritalStatus | MARITAL_STATUS | String(1) |
+| existsInClassFlag | EXISTS_IN_CLASS_FLAG | String(1) nn |
+| enrolledFlag | ENROLLED_FLAG | String(1) nn |
+| bankruptFlag | BANKRUPT_FLAG | String(1) nn |
+| currentLeaCode | CURRENT_LEA_CODE | String(4) |
+| latestApplicationYear | LATEST_APPLICATION_YEAR | Integer |
+| classMigratedFlag | CLASS_MIGRATED_FLAG | String(1) nn |
+| leaMigratedFlag | LEA_MIGRATED_FLAG | String(1) nn |
+| migrationBatchNumber | MIGRATION_BATCH_NUMBER | Integer |
+| leaPartyId | LEA_PARTY_ID | String(30) |
+| restrictSecondaryAuthInd | RESTRICT_SECONDARY_AUTH_IND | String(1) |
+| parentalEducationFlag | PARENTAL_EDUCATION_FLAG | String(1) |
+| corrFailedFlag | CORR_FAILED_FLAG | String(1) |
+| fyfcAcadYear | FYFC_ACAD_YEAR | Integer |
+| fyfcCourseCode | FYFC_COURSE_CODE | Long |
+| fyfcCourseYear | FYFC_COURSE_YEAR | Integer |
+| irMatchingStatus | IR_MATCHING_STATUS | Integer |
+| artId | ART_ID | String(30) nn |
+| activeInd | ACTIVE_IND | String(1) nn |
+| title | TITLE | String(10) |
+| forenames | FORENAMES | String(50) |
+| surname | SURNAME | String(50) nn |
+| sex | SEX | String(1) nn |
+| studentSupportNumber | STUDENT_SUPPORT_NUMBER | String(13) |
+| nationalInsuranceNumber | NATIONAL_INSURANCE_NUMBER | String(9) |
+| ninoStatusType | NINO_STATUS_TYPE | String(2) |
+| dateOfBirth | DATE_OF_BIRTH | Timestamp nn |
+| townOfBirth | TOWN_OF_BIRTH | String(30) |
+| countryOfBirth | COUNTRY_OF_BIRTH | String(30) |
+| declaredEthnicityType | DECLARED_ETHNICITY_TYPE | String(2) |
+| sensitiveInd | SENSITIVE_IND | String(1) |
+| customerCareInd | CUSTOMER_CARE_IND | String(1) |
+| suspectInd | SUSPECT_IND | String(1) |
+| suspectReasonType | SUSPECT_REASON_TYPE | String(1) |
+| suppressionInd | SUPPRESSION_IND | String(1) |
+| suppressionReasonType | SUPPRESSION_REASON_TYPE | String(1) |
+| preferredLanguageType | PREFERRED_LANGUAGE_TYPE | String(3) |
+| brailleType | BRAILLE_TYPE | String(1) |
+| preferredContactType | PREFERRED_CONTACT_TYPE | String(1) |
+| preferredPhoneType | PREFERRED_PHONE_TYPE | String(9) |
+| homePhoneNumber | HOME_PHONE_NUMBER | String(20) |
+| workPhoneNumber | WORK_PHONE_NUMBER | String(20) |
+| mobilePhoneNumber | MOBILE_PHONE_NUMBER | String(20) |
+| emailAddress | EMAIL_ADDRESS | String(80) |
+| preferredAddressType | PREFERRED_ADDRESS_TYPE | String(5) |
+| previousSfdLacInd | PREVIOUS_SFD_LAC_IND | String(1) |
+| versionNumber | VERSION_NUMBER | int nn |
+| remoteApplication | REMOTE_APPLICATION | String(30) |
+| remoteLastUpdatedBy | REMOTE_LAST_UPDATED_BY | String(30) |
+| remoteLastUpdatedDateTime | REMOTE_LAST_UPDATED_DATE_TIME | Timestamp |
+| addresses | key CSR_ID | set → Address |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CourseYear,XXSL_COURSE_YEARS,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),CourseYear → XXSL_COURSE_YEARS,4159,4168,"### CourseYear → XXSL_COURSE_YEARS
+- **Composite id:** CourseYearPK (CRS_COURSE_CODE Long, AYR_ACAD_YR Integer, TERM_NUMBER Integer, COURSE_YEAR Integer).
+
+| Field | Column | Type |
+|---|---|---|
+| startDate | START_DATE | Timestamp |
+| endDate | END_DATE | Timestamp |
+| courseFeeCap | COURSE_FEE_CAP | Integer |
+| courseLocation | CLO_LOCATION_ID | many-to-one CourseLocation |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CourseLocation,XXSL_COURSE_LOCATIONS,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),CourseLocation → XXSL_COURSE_LOCATIONS,4169,4176,"### CourseLocation → XXSL_COURSE_LOCATIONS
+Id: LOCATION_ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| franchiseId | FRA_ID | Long |
+| heiLocationId | HLN_LOCN_ID | Long |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+Course,XXSL_COURSES,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),Course → XXSL_COURSES,4177,4204,"### Course → XXSL_COURSES
+Id: COURSE_CODE (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| colHeiCode | COL_HEI_CODE | String(4) nn |
+| ucasCourse | UCAS_COURSE | String(1) nn |
+| shortName | SHORT_NAME | String(41) |
+| title | TITLE | String(120) |
+| description | DESCRIPTION | String(120) |
+| courseType | COURSE_TYPE | String(11) |
+| qualification | QUALIFICATION | String(8) |
+| methodOfAttendance | METHOD_OF_ATTENDANCE | AttendanceMethodTypeEnumType |
+| duration | DURATION | Integer |
+| status | STATUS | CourseStatusEnumType nn |
+| thirdPartyCode | THIRD_PARTY_CODE | String(4) |
+| createdDate | CREATED_DATE | Timestamp nn |
+| lastUpdatedBy | LAST_UPDATED_BY | String(30) |
+| lastUpdatedDateTime | LAST_UPDATED_DATE_TIME | Timestamp |
+| closeEffectDate | CLOSE_EFFECT_DATE | Date |
+| ucasSuffix | UCAS_SUFFIX | String(2) |
+| heiExtractCode | HEI_EXTRACT_CODE | String(6) |
+| termsChangedInd | TERMS_CHANGED_IND | yes_no |
+| allowDistantRegistrationInd | ALLOW_DISTANT_REGISTRATION_IND | yes_no |
+| openEffectDate | OPEN_EFFECT_DATE | Date |
+| jacsCode | JACS_CODE | String(4) |
+| courseYears | key CRS_COURSE_CODE | set → CourseYear |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+AwardAuthority,XXSL_AWARD_AUTHORITIES,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),AwardAuthority → XXSL_AWARD_AUTHORITIES,4205,4223,"### AwardAuthority → XXSL_AWARD_AUTHORITIES
+Id: LEA_CODE (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| leaName | LEA_NAME | String(100) nn |
+| leaShortCode | LEA_SHORT_CODE | String(4) |
+| country | COUNTRY | String(30) nn |
+| participating | PARTICIPATING | String(1) nn |
+| startDate | START_DATE | Timestamp nn |
+| endDate | END_DATE | Timestamp |
+| auditInfo | LAST_UPDATED_BY, LAST_UPDATED_DATE_TIME, CREATED_BY, **CREATION_DATE** | HAuditInfo |
+| migrationBatchNumber | MIGRATION_BATCH_NUMBER | Integer |
+| rotGroupId | ROT_GROUP_ID | Long |
+| potentialToMoveRg | POTENTIAL_TO_MOVE_RG | String(1) |
+| domicileTypeEnum | DOMICILE_TYPE | DomicileTypeEnumType |
+| awardAuthority | PROCESSING_LEA_CODE | many-to-one (self) |
+| awardAuthorities | key PROCESSING_LEA_CODE | set (self) |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+Address,XXSL_ADDRESSES,5.2 hei-common-stakeholder-api (`uk.co.slc.hei.commonstakeholder.api.data`),Address → XXSL_ADDRESSES,4224,4241,"### Address → XXSL_ADDRESSES
+- **Composite id:** AddressPK (CSR_ID Long, ADDRESS_TYPE String(5)).
+- **Cache:** read-only.
+
+| Field | Column | Type |
+|---|---|---|
+| addressLine1..3 | ADDRESS_LINE_1..3 | String(240) (line 1 nn) |
+| city | CITY | String(60) |
+| county | COUNTY | String(60) |
+| postCode | POST_CODE | String(8) |
+| inactiveDate | INACTIVE_DATE | Timestamp |
+| versionNumber | VERSION_NUMBER | int nn |
+| auditInfo | audit cols | HAuditInfo |
+| remoteApplication | REMOTE_APPLICATION | String(30) |
+| remoteLastUpdatedBy | REMOTE_LAST_UPDATED_BY | String(30) |
+| remoteLastUpdatedDateTime | REMOTE_LAST_UPDATED_DATE_TIME | Timestamp |
+| customer | CSR_ID | many-to-one Customer |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+SubscriptionPOJO,SUBSCRIPTIONS,5.3 hei-subscription-hibernate-service (`uk.co.slc.hei.subscription.service.data`),SubscriptionPOJO → SUBSCRIPTIONS,4244,4257,"### SubscriptionPOJO → SUBSCRIPTIONS
+Id: ID (seq `SUB_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| serviceTypeEnum | SERVICE_TYPE | ServiceTypeEnumType |
+| suspendServiceIndicator | SUSPEND_SERVICE_IND | yes_no |
+| effectiveFrom | EFFECTIVE_FROM_DATE | date |
+| effectiveTo | EFFECTIVE_TO_DATE | date |
+| serviceProfileId | HSP_ID | long |
+| HEICode | COL_HEI_CODE | string |
+| subscriptionAcademicYears | key SUB_ID | set → SubscriptionAcademicYearPOJO |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+SubscriptionAcademicYearPOJO,SUBSCRIPTION_ACADEMIC_YEARS,5.3 hei-subscription-hibernate-service (`uk.co.slc.hei.subscription.service.data`),SubscriptionAcademicYearPOJO → SUBSCRIPTION_ACADEMIC_YEARS,4258,4266,"### SubscriptionAcademicYearPOJO → SUBSCRIPTION_ACADEMIC_YEARS
+Id: ID (seq `SAY_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| HESAcademicYearPOJO | HAY_ID | many-to-one |
+| SubscriptionPOJO | SUB_ID | many-to-one |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+RegulatoryMaximumPOJO,REGULATORY_MAXIMUMS,5.3 hei-subscription-hibernate-service (`uk.co.slc.hei.subscription.service.data`),RegulatoryMaximumPOJO → REGULATORY_MAXIMUMS,4267,4278,"### RegulatoryMaximumPOJO → REGULATORY_MAXIMUMS
+Id: ID (seq `RMX_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| amount | AMOUNT | Double |
+| hesAcademicYearId | HAY_ID | Long |
+| domicileTypeId | DOMICILE_TYPE | Integer |
+| productTypeId | PRODUCT_TYPE | Integer |
+| studentCohortCategoryTypeId | STUDENT_COHORT_CATEGORY_TYPE | Integer |
+| createdBy / createdOn / updatedBy / updatedOn | audit cols | string / date |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HESAcademicYearPOJO,HES_ACADEMIC_YEARS,5.3 hei-subscription-hibernate-service (`uk.co.slc.hei.subscription.service.data`),HESAcademicYearPOJO → HES_ACADEMIC_YEARS,4279,4289,"### HESAcademicYearPOJO → HES_ACADEMIC_YEARS
+Id: ID (seq `HAY_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| academicYearPOJO | ACY_ID | many-to-one AcademicYearPOJO |
+| serviceTypeEnum | SERVICE_TYPE | ServiceTypeEnumType |
+| active | ACTIVE_IND | yes_no |
+| currentYearIndicator | CURRENT_YEAR_IND | string |
+| createdBy / createdOn / updatedBy / updatedOn | audit cols | string / date |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+AcademicYearPOJO,XXSL_ACADEMIC_YEARS,5.3 hei-subscription-hibernate-service (`uk.co.slc.hei.subscription.service.data`),AcademicYearPOJO → XXSL.XXSL_ACADEMIC_YEARS,4290,4299,"### AcademicYearPOJO → XXSL.XXSL_ACADEMIC_YEARS
+Id: ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| yearStartDate | YEAR_START_DATE | date nn |
+| yearEndDate | YEAR_END_DATE | date nn |
+| currentYearFlag | CURRENT_YEAR_FLAG | string(1) nn |
+| rulesAvailableFlag | RULES_AVAILABLE_FLAG | string(1) nn |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+UserGroupPOJO,XXSL_USR_GROUPS,5.4 hei-authentication-hibernate-service (read-only mappings),UserGroupPOJO → XXSL_USR_GROUPS,4302,4311,"### UserGroupPOJO → XXSL_USR_GROUPS
+Id: CODE (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| name | NAME | String(50) nn |
+| implementationReference | IMPLEMENTATION_REFERENCE | String(100) nn |
+| category | CATEGORY | int nn |
+| createdBy / createdDateTime / lastUpdatedBy / lastUpdatedDateTime | audit cols | String / Timestamp |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+UserGroupMembershipPOJO,XXSL_USER_GROUP_MEMBERSHIPS,5.4 hei-authentication-hibernate-service (read-only mappings),UserGroupMembershipPOJO → XXSL_USER_GROUP_MEMBERSHIPS,4312,4322,"### UserGroupMembershipPOJO → XXSL_USER_GROUP_MEMBERSHIPS
+Id: ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| startDateTime | START_DATE_TIME | Timestamp nn |
+| endDateTime | END_DATE_TIME | Timestamp |
+| usgCode | USG_CODE | Long (read-only) |
+| UserGroupPOJO | USG_CODE | many-to-one nn |
+| audit cols | CREATED_BY / CREATED_DATE_TIME / LAST_UPDATED_BY / LAST_UPDATED_DATE_TIME | String / Timestamp |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+UserDetailsPOJO,XXSL_USERS,5.4 hei-authentication-hibernate-service (read-only mappings),UserDetailsPOJO → XXSL_USERS,4323,4336,"### UserDetailsPOJO → XXSL_USERS
+Id: USERNAME (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| forenames | FORENAMES | String(50) nn |
+| surname | SURNAME | String(50) nn |
+| contactNumber | CONTACT_NUMBER | String(20) |
+| expiredInd | EXPIRED_IND | String(1) nn |
+| versionNumber | VERSION_NUMBER | long nn |
+| emailAddress | EMAIL_ADDRESS | String(80) nn |
+| audit cols | CREATED_BY / CREATED_DATE_TIME / LAST_UPDATED_BY / LAST_UPDATED_DATE_TIME | String / Timestamp |
+| UserGroupMemberships | key USR_USERNAME | set → UserGroupMembershipPOJO |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HeiTuitionFeeTypePOJO,XXSL_HEI_TUITION_FEE_TYPES,5.5 hei-identify-hei-hibernate-service (`uk.co.slc.hei.identifyhei.service.data`),HeiTuitionFeeTypePOJO → XXSL_HEI_TUITION_FEE_TYPES,4339,4347,"### HeiTuitionFeeTypePOJO → XXSL_HEI_TUITION_FEE_TYPES
+- **Composite id:** HeiTuitionFeeTypeId (START_ACAD_YR Integer, COL_HEI_CODE String).
+
+| Field | Column | Type |
+|---|---|---|
+| heiTuitionFeeType | HEI_TUITION_FEE_TYPE | String |
+| endAcadYr | END_ACAD_YR | Integer |
+| higherTuitionFeeAmount | HIGHER_TUITION_FEE_AMOUNT | Double |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+HEIPOJO,XXSL_COLLEGES,5.5 hei-identify-hei-hibernate-service (`uk.co.slc.hei.identifyhei.service.data`),HEIPOJO → XXSL_COLLEGES,4348,4384,"### HEIPOJO → XXSL_COLLEGES
+- **Id:** HEI_CODE (assigned).
+- **Audit columns:** none.
+
+| Field | Column | Type |
+|---|---|---|
+| createDate | CREATE_DATE | Timestamp nn |
+| rootOrAliasInd | ROOT_OR_ALIAS_IND | String(1) nn |
+| status | STATUS | String(1) nn |
+| createUser | CREATE_USER | String(30) nn |
+| linkDate | LINK_DATE | Timestamp |
+| mergerEffectDate | MERGER_EFFECT_DATE | Timestamp |
+| closeDate | CLOSE_DATE | Timestamp |
+| closeEffectDate | CLOSE_EFFECT_DATE | Timestamp |
+| promotionDate | PROMOTION_DATE | Timestamp |
+| updateUser | UPDATE_USER | String(30) |
+| region | REGION | String(20) |
+| shortName | SHORT_NAME | String(45) |
+| fullName | FULL_NAME | String(50) |
+| constituency | CONSTITUENCY | String(50) |
+| parentHEICode | PARENT_HEI_CODE | String(4) |
+| pmntMthd | PMNT_MTHD | String(1) |
+| mergeDate | MERGE_DATE | Timestamp |
+| country | COUNTRY | String(16) |
+| updateDate | UPDATE_DATE | Timestamp |
+| geogGrp | GEOG_GRP | String(4) |
+| prevPmntMthd | PREV_PMNT_MTHD | String(1) |
+| ucasCode | UCAS_CODE | String(3) |
+| sssIndicator | SSS_INDICATOR | String(1) |
+| chaserSentDate | CHASER_SENT_DATE | Timestamp |
+| ucasCodeUseInd | UCAS_CODE_USE_IND | String(1) |
+| bacsFirstParticipation | BACS_FIRST_PARTICIPATION | String(1) |
+| bacsFirstWoodenDollar | BACS_FIRST_WOODEN_DOLLAR | String(1) |
+| rescheduleInd | RESCHEDULE_IND | String(1) |
+| vtfParticipant | VTF_PARTICIPANT | String(1) |
+| depth | (not mapped) | int |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CollegeAcademicYearPOJO,XXSL_COLL_ACAD_YRS,5.5 hei-identify-hei-hibernate-service (`uk.co.slc.hei.identifyhei.service.data`),CollegeAcademicYearPOJO → XXSL_COLL_ACAD_YRS,4385,4391,"### CollegeAcademicYearPOJO → XXSL_COLL_ACAD_YRS
+- **Composite id:** CollegeAcademicYearId (AYR_ACAD_YR Integer, COL_HEI_CODE String).
+
+| Field | Column | Type |
+|---|---|---|
+| offaFeeCap | OFFA_FEE_CAP | Integer |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+PaymentSchedulePOJO,PAYMENT_SCHEDULES,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),PaymentSchedulePOJO → PAYMENT_SCHEDULES,4394,4402,"### PaymentSchedulePOJO → PAYMENT_SCHEDULES
+Id: ID (seq `PSC_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| scheduleDate | SCHEDULE_DATE | Timestamp |
+| serviceTypeEnum | SERVICE_TYPE | ServiceTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+PaymentInstalmentPOJO,PAYMENT_INSTALMENTS,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),PaymentInstalmentPOJO → PAYMENT_INSTALMENTS,4403,4418,"### PaymentInstalmentPOJO → PAYMENT_INSTALMENTS
+Id: ID (seq `PIN_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| instalmentNumber | INSTALMENT_NUMBER | Integer |
+| paymentDate | PAYMENT_DATE | Timestamp |
+| statusDate | STATUS_DATE | Timestamp |
+| amount | AMOUNT | Double |
+| active | ACTIVE_IND | yes_no nn |
+| statusTypeEnum | STATUS_TYPE | PaymentInstalmentStatusTypeEnumType |
+| triggerTypeEnum | TRIGGER_TYPE | TriggerTypeEnumType |
+| pendedReasonTypeEnum | PENDED_REASON_TYPE | PendedReasonTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+| paymentInstalmentHistories | key PIN_ID | set → PaymentInstalmentHistoryPOJO |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+PaymentInstalmentHistoryPOJO,PAYMENT_INSTALMENT_HISTORIES,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),PaymentInstalmentHistoryPOJO → PAYMENT_INSTALMENT_HISTORIES,4419,4423,"### PaymentInstalmentHistoryPOJO → PAYMENT_INSTALMENT_HISTORIES
+- **Id:** ID (seq `PIH_ID_SEQ`).
+- **Columns:** the same 8 business columns as PAYMENT_INSTALMENTS, plus auditInfo.
+- **Relation:** paymentInstalmentPOJO (PIN_ID, many-to-one nn).
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+FundingRunPOJO,FUNDING_RUNS,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),FundingRunPOJO → FUNDING_RUNS,4424,4434,"### FundingRunPOJO → FUNDING_RUNS
+Id: ID (seq `FRU_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| requestDate | REQUEST_DATE | Timestamp nn |
+| serviceTypeEnum | SERVICE_TYPE | ServiceTypeEnumType |
+| runStatusTypeEnum | RUN_STATUS_TYPE | RunStatusTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+| collegeFunds | key FRU_ID | set → CollegeFundPOJO |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+FeeWaiverInstalmentPOJO,FEE_WAIVER_INSTALMENTS,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),FeeWaiverInstalmentPOJO → FEE_WAIVER_INSTALMENTS,4435,4449,"### FeeWaiverInstalmentPOJO → FEE_WAIVER_INSTALMENTS
+Id: ID (seq `FWI_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| instalmentNumber | INSTALMENT_NUMBER | Integer |
+| statusDate | STATUS_DATE | Timestamp |
+| amount | AMOUNT | Double |
+| active | ACTIVE_IND | yes_no nn |
+| feeWaiverDate | FEE_WAIVER_DATE | Timestamp |
+| statusTypeEnum | STATUS_TYPE | FeeWaiverInstalmentStatusTypeEnumType |
+| pendedReasonTypeEnum | PENDED_REASON_TYPE | FeeWaiverPendedReasonTypeEnumType |
+| auditInfo | audit cols | HAuditInfo |
+| feeWaiverInstalmentHistories | key FWI_ID | set → FeeWaiverInstalmentHistoryPOJO |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+FeeWaiverInstalmentHistoryPOJO,FEE_WAIVER_INSTAL_HISTORIES,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),FeeWaiverInstalmentHistoryPOJO → FEE_WAIVER_INSTAL_HISTORIES,4450,4454,"### FeeWaiverInstalmentHistoryPOJO → FEE_WAIVER_INSTAL_HISTORIES
+- **Id:** ID (seq `FWH_ID_SEQ`).
+- **Columns:** the same 7 business columns as FEE_WAIVER_INSTALMENTS, plus auditInfo.
+- **Relation:** feeWaiverInstalmentPOJO (FWI_ID, nn).
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+CollegeFundPOJO,COLLEGE_FUNDS,5.6 hei-payments-hibernate-service (`uk.co.slc.hei.payments.service.data`),CollegeFundPOJO → COLLEGE_FUNDS,4455,4468,"### CollegeFundPOJO → COLLEGE_FUNDS
+Id: ID (seq `CLF_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| requestAmount | REQUEST_AMOUNT | BigDecimal |
+| totalPaymentAmount | TOTAL_PAYMENT_AMOUNT | BigDecimal |
+| paymentDate | PAYMENT_DATE | Timestamp nn |
+| statusTypeEnum | STATUS_TYPE | CollegeFundStatusTypeEnumType |
+| colHeiCode | COL_HEI_CODE | String(4) nn |
+| acyId | ACY_ID | int nn |
+| auditInfo | audit cols | HAuditInfo |
+| fundingRunPOJO | FRU_ID | many-to-one nn |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ServiceContactTypePOJO,SERVICE_CONTACT_TYPES,5.7 hei-contacts-hibernate-service (`uk.co.slc.hei.heicontacts.service.data`),ServiceContactTypePOJO → SERVICE_CONTACT_TYPES,4471,4478,"### ServiceContactTypePOJO → SERVICE_CONTACT_TYPES
+Id: ID (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| serviceTypeEnum | SERVICE_TYPE | ServiceTypeEnumType |
+| hesContactTypeEnum | HES_CONTACT_TYPE | HesContactTypeEnumType |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ServiceContactPOJO,HEI_SERVICE_CONTACTS,5.7 hei-contacts-hibernate-service (`uk.co.slc.hei.heicontacts.service.data`),ServiceContactPOJO → HEI_SERVICE_CONTACTS,4479,4487,"### ServiceContactPOJO → HEI_SERVICE_CONTACTS
+Id: ID (seq `HSC_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| contactPOJO | HCO_ID | many-to-one ContactPOJO |
+| serviceContactTypePOJO | SCT_ID | many-to-one |
+| auditInfo | audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ContactPOJO,HEI_HES_CONTACTS,5.7 hei-contacts-hibernate-service (`uk.co.slc.hei.heicontacts.service.data`),ContactPOJO → HEI_HES_CONTACTS,4488,4506,"### ContactPOJO → HEI_HES_CONTACTS
+Id: ID (seq `HCO_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| title | TITLE | string |
+| forenames | FORENAMES | string |
+| surname | SURNAME | string |
+| jobTitle | JOB_TITLE | string |
+| department | DEPARTMENT | string |
+| HEIOffice | HEI_OFFICE | string |
+| workPhonenumber | WORK_PHONE_NUMBER | string |
+| workExtensionumber | WORK_EXTENSION_NUMBER | string |
+| workEmailaddress | WORK_EMAIL_ADDRESS | string |
+| deleted | DELETED | yes_no |
+| HEICode | COL_HEI_CODE | string |
+| auditInfo | audit cols | HAuditInfo |
+| serviceContacts | key HCO_ID | set → ServiceContactPOJO |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+XxslSyncException,XXSL_SYNC_EXCEPTIONS,6.1 JAVHEP (Hibernate `hbm.xml`),XxslSyncException (`uk.co.slc.sync.exceptions.service.data`) → XXSL_SYNC_EXCEPTIONS,4538,4559,"### XxslSyncException (`uk.co.slc.sync.exceptions.service.data`) → XXSL_SYNC_EXCEPTIONS
+Id: ID (seq `SYE_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| categoryTypeEnum | CATEGORY_TYPE | CategoryTypeEnumType nn |
+| recordType | RECORD_TYPE | RecordTypeEnumType nn |
+| sourceTable | SOURCE_TABLE | String(30) nn |
+| primarySelectionDetails | PRIMARY_SELECTION_DETAILS | String(30) nn |
+| primarySelectionValue | PRIMARY_SELECTION_VALUE | String(255) nn |
+| secondarySelectionDetails | SECONDARY_SELECTION_DETAILS | String(255) |
+| secondarySelectionValue | SECONDARY_SELECTION_VALUE | String(255) |
+| triggeringModule | TRIGGERING_MODULE | String(50) nn |
+| errorDetails | ERROR_DETAILS | String(4000) nn |
+| recordDetails | RECORD_DETAILS | String(4000) |
+| statusType | STATUS_TYPE | StatusTypeEnumType |
+| createdBy | CREATED_BY | String(30) nn |
+| createdDateTime | CREATED_DATE_TIME | Timestamp nn |
+| lastUpdatedBy | LAST_UPDATED_BY | String(30) nn |
+| lastUpdatedDateTime | LAST_UPDATED_DATE_TIME | Timestamp nn |
+| versionNumber | VERSION_NUMBER | Integer |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+PersistentExchangeRate,XXSL_CURRENCY_RATES,6.1 JAVHEP (Hibernate `hbm.xml`),PersistentExchangeRate (`uk.co.slc.currency.impl`) → XXSL_CURRENCY_RATES,4560,4570,"### PersistentExchangeRate (`uk.co.slc.currency.impl`) → XXSL_CURRENCY_RATES
+Id: id (seq `cra_id_seq`).
+
+| Field | Column | Type |
+|---|---|---|
+| effectiveFromDate | effective_from | Date nn |
+| effectiveToDate | effective_to | Date |
+| rate | rate | Double nn |
+| currency | cur_currency_code | CurrencyEnumType nn |
+| createdBy / createdDate / lastUpdatedBy / lastUpdatedDate | created_by / created_date_time / last_updated_by / last_updated_date_time | String / Date |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ServiceTransactionLog,XXSL_SERVICE_TRANSACTION_LOGS,6.1 JAVHEP (Hibernate `hbm.xml`),ServiceTransactionLog → XXSL_SERVICE_TRANSACTION_LOGS (immutable),4571,4585,"### ServiceTransactionLog → XXSL_SERVICE_TRANSACTION_LOGS (immutable)
+Id: ID (seq `XXSL_STL_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| serviceType | service_type | ServiceTransactionTypeEnumType nn |
+| requestDescription | request_description | String(100) nn |
+| serviceUserId | service_user_id | String(30) nn |
+| failureReason | failure_reason | String(4000) |
+| failureIndicator | failure_indicator | String(1) |
+| requestStartDateTime | request_start_date_time | Date nn |
+| requestEndDateTime | request_end_date_time | Date |
+| exiId | exi_id | Long |
+| auditInfo | created_by / created_date_time / last_updated_by / last_updated_date_time | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+SecretQuestion,XXSL_OM_SECRET_QUESTION,6.1 JAVHEP (Hibernate `hbm.xml`),"SecretQuestion → XXSL_OM_SECRET_QUESTION (immutable, read-only cache)",4586,4593,"### SecretQuestion → XXSL_OM_SECRET_QUESTION (immutable, read-only cache)
+Id: id Integer (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| available | is_available | yes_no nn |
+| questionTextMap | map table XXSL_OM_SECRET_QUESTION_V (key id, index language, element question) | SortedMap |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+LondonPostcode,XXSL_LONDON_POSTCODES,6.1 JAVHEP (Hibernate `hbm.xml`),LondonPostcode → XXSL_LONDON_POSTCODES (immutable),4594,4599,"### LondonPostcode → XXSL_LONDON_POSTCODES (immutable)
+| Field | Column | Type |
+|---|---|---|
+| identifier.postcode | postcode | String (key) |
+| identifier.year | acy_id | Integer (key) |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+ExternalIdentification,XXSL_EXTERNAL_IDENTIFICATIONS,6.1 JAVHEP (Hibernate `hbm.xml`),ExternalIdentification → XXSL_EXTERNAL_IDENTIFICATIONS,4600,4613,"### ExternalIdentification → XXSL_EXTERNAL_IDENTIFICATIONS
+Id: ID (seq `XXSL_EXI_ID_SEQ`).
+
+| Field | Column | Type |
+|---|---|---|
+| externalPartyType | external_party_type | Integer nn |
+| externalIdType | external_id_type | Integer nn |
+| externalId | external_id | String(30) nn |
+| tokenOfConsent | token_of_consent | String(100) nn |
+| consentToDateTime | consent_to_date_time | Date |
+| consentFromDateTime | consent_from_date_time | Date nn |
+| csrId | csr_id | Long nn |
+| auditInfo | 4 audit cols | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+Country,FND_TERRITORIES_TL,6.1 JAVHEP (Hibernate `hbm.xml`),Country → FND_TERRITORIES_TL (immutable),4614,4621,"### Country → FND_TERRITORIES_TL (immutable)
+Id: territory_code String (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| shortDescriptionMap | map table XXSL_FND_TERRITORIES_TL_V (territory_short_name by language) | SortedMap |
+| longDescriptionMap | map table XXSL_FND_TERRITORIES_TL_V (description by language) | SortedMap |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+AwardAuthority,XXSL_AWARD_AUTHORITIES,6.1 JAVHEP (Hibernate `hbm.xml`),AwardAuthority → XXSL_AWARD_AUTHORITIES (immutable),4622,4640,"### AwardAuthority → XXSL_AWARD_AUTHORITIES (immutable)
+Id: lea_code String (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| LEANameMap | map table XXSL_AWARD_AUTHORITIES_V (lea_name by language) | SortedMap |
+| domicile | domicile_type | DomicileEnumType |
+| participating | participating | yes_no nn |
+| startDate | start_date | Date nn |
+| endDate | end_date | Date |
+| migrationBatchNumber | migration_batch_number | Integer |
+| LEAShortCode | lea_short_code | String(4) unique |
+| rotGroupId | rot_group_id | Long |
+| potentialToMoveRg | potential_to_move_rg | String(1) |
+| processingAwardAuthority | processing_lea_code | many-to-one (self) |
+| Cpu | CPU_IND | yes_no |
+| auditInfo | created_by / creation_date / last_updated_by / last_updated_date_time | HAuditInfo |
+| addresses | key lea_code | set → AwardAuthorityAddress |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+AwardAuthorityAddress,XXSL_AWA_ADDRESSES,6.1 JAVHEP (Hibernate `hbm.xml`),AwardAuthorityAddress → XXSL_AWA_ADDRESSES (immutable),4641,4651,"### AwardAuthorityAddress → XXSL_AWA_ADDRESSES (immutable)
+- **Composite id:** pk (address_order Integer, lea_code → AwardAuthority).
+
+| Field | Column | Type |
+|---|---|---|
+| startDate | start_date | Date nn |
+| endDate | end_date | Date |
+| migrationBatchNumber | migration_batch_number | Integer |
+| addressLineMap | map table XXSL_AWA_ADDRESSES_V (address_line by language) | SortedMap |
+| auditInfo | created_by / creation_date / last_updated_by / last_updated_date_time | HAuditInfo |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable
+AcademicYear,XXSL_ACADEMIC_YEARS,6.1 JAVHEP (Hibernate `hbm.xml`),AcademicYear → XXSL_ACADEMIC_YEARS (immutable),4652,4661,"### AcademicYear → XXSL_ACADEMIC_YEARS (immutable)
+Id: id Integer (assigned).
+
+| Field | Column | Type |
+|---|---|---|
+| yearStartDate | year_start_date | Date nn |
+| yearEndDate | year_end_date | Date nn |
+| currentYearFlag | current_year_flag | String(1) nn |
+| rulesAvailableFlag | rules_available_flag | String(1) nn |
+",DOCUMENTED_CURRENT,Alternative documentary mapping; legacy source unavailable

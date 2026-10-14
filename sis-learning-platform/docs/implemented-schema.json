@@ -1,0 +1,1866 @@
+[
+  {
+    "data_type": "integer",
+    "table_name": "academic_years",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "date",
+    "table_name": "academic_years",
+    "column_name": "start_date",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "date",
+    "table_name": "academic_years",
+    "column_name": "end_date",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "academic_years",
+    "column_name": "active",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "applications",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "source_ref",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "student_name",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "source",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "course_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "applications",
+    "column_name": "academic_year",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "numeric",
+    "table_name": "applications",
+    "column_name": "fee",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "currency",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "registration",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "applications",
+    "column_name": "attendance",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "bigint",
+    "table_name": "applications",
+    "column_name": "version",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "applications",
+    "column_name": "updated_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "applications",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "applications",
+    "column_name": "credits",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": "120"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "applications",
+    "column_name": "student_id",
+    "is_nullable": "YES",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "campuses",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "campuses",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "campuses",
+    "column_name": "name",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "cocs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "cocs",
+    "column_name": "application_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "cocs",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "cocs",
+    "column_name": "type",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "cocs",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "cocs",
+    "column_name": "reason",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "date",
+    "table_name": "cocs",
+    "column_name": "effective_date",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "cocs",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "course_modules",
+    "column_name": "course_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "course_modules",
+    "column_name": "module_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "course_variants",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "course_variants",
+    "column_name": "course_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "course_variants",
+    "column_name": "campus_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "course_variants",
+    "column_name": "academic_year",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "course_variants",
+    "column_name": "qualification_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "courses",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "courses",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "courses",
+    "column_name": "title",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "courses",
+    "column_name": "credits",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "feature_toggles",
+    "column_name": "name",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "feature_toggles",
+    "column_name": "toggle_value",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "flyway_schema_history",
+    "column_name": "installed_rank",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "version",
+    "is_nullable": "YES",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "description",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "type",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "script",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "flyway_schema_history",
+    "column_name": "checksum",
+    "is_nullable": "YES",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "installed_by",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp without time zone",
+    "table_name": "flyway_schema_history",
+    "column_name": "installed_on",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "integer",
+    "table_name": "flyway_schema_history",
+    "column_name": "execution_time",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "flyway_schema_history",
+    "column_name": "success",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "histories",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "histories",
+    "column_name": "application_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "histories",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "histories",
+    "column_name": "event",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "histories",
+    "column_name": "detail",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "histories",
+    "column_name": "actor",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "histories",
+    "column_name": "occurred_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "import_jobs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "import_jobs",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "import_jobs",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "import_jobs",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "import_rows",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "import_rows",
+    "column_name": "job_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "import_rows",
+    "column_name": "row_number",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "import_rows",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "import_rows",
+    "column_name": "detail",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "instalments",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "instalments",
+    "column_name": "application_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "instalments",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "instalments",
+    "column_name": "number",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "numeric",
+    "table_name": "instalments",
+    "column_name": "amount",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "instalments",
+    "column_name": "currency",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "date",
+    "table_name": "instalments",
+    "column_name": "due_date",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "modules",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "modules",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "modules",
+    "column_name": "title",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "modules",
+    "column_name": "credits",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "outbox_events",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "outbox_events",
+    "column_name": "aggregate_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "event_type",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "outbox_events",
+    "column_name": "attempts",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "target",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": "'MULE'::character varying"
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "next_attempt",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": "CURRENT_TIMESTAMP"
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "last_error",
+    "is_nullable": "YES",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "processed_events",
+    "column_name": "event_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "processed_events",
+    "column_name": "receiver",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "processed_events",
+    "column_name": "processed_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "providers",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "providers",
+    "column_name": "name",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "qualifications",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "qualifications",
+    "column_name": "title",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "request_receipts",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "request_receipts",
+    "column_name": "request_key",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "request_receipts",
+    "column_name": "fingerprint",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "request_receipts",
+    "column_name": "result_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "rule_configs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "rule_configs",
+    "column_name": "description",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "rule_configs",
+    "column_name": "enabled",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "rule_configs",
+    "column_name": "policy",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "students",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "students",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "students",
+    "column_name": "demo_label",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "students",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "subscriptions",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "subscriptions",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "subscriptions",
+    "column_name": "academic_year",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "subscriptions",
+    "column_name": "service",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "subscriptions",
+    "column_name": "active",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "sync_exceptions",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "sync_exceptions",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "sync_exceptions",
+    "column_name": "service",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "sync_exceptions",
+    "column_name": "error_code",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "sync_exceptions",
+    "column_name": "message_masked",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "sync_exceptions",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tuition_finance_details",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tuition_finance_details",
+    "column_name": "tuition_period_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "numeric",
+    "table_name": "tuition_finance_details",
+    "column_name": "fee",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tuition_finance_details",
+    "column_name": "currency",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "tuition_finance_details",
+    "column_name": "credits",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tuition_period_histories",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tuition_period_histories",
+    "column_name": "tuition_period_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tuition_period_histories",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "numeric",
+    "table_name": "tuition_period_histories",
+    "column_name": "fee",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "tuition_period_histories",
+    "column_name": "credits",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tuition_period_histories",
+    "column_name": "event",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "tuition_period_histories",
+    "column_name": "occurred_at",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tuition_periods",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tuition_periods",
+    "column_name": "application_id",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tuition_periods",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "date",
+    "table_name": "tuition_periods",
+    "column_name": "start_date",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "date",
+    "table_name": "tuition_periods",
+    "column_name": "end_date",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tuition_periods",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "business",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "agent_runs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "agent_runs",
+    "column_name": "session_id",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "agent_runs",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "agent_runs",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "audit_logs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "audit_logs",
+    "column_name": "actor",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "audit_logs",
+    "column_name": "event_type",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "audit_logs",
+    "column_name": "target_id",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "audit_logs",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "chat_messages",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "chat_messages",
+    "column_name": "session_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "chat_messages",
+    "column_name": "role",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "text",
+    "table_name": "chat_messages",
+    "column_name": "content_masked",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "chat_messages",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "chat_messages",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "bigint",
+    "table_name": "chat_messages",
+    "column_name": "message_order",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "nextval('knowledge.chat_messages_message_order_seq'::regclass)"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "chat_sessions",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "chat_sessions",
+    "column_name": "owner",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "chat_sessions",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "chat_sessions",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "chat_turns",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "chat_turns",
+    "column_name": "session_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "chat_turns",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "chat_turns",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "code_relations",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "code_relations",
+    "column_name": "from_document_id",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "code_relations",
+    "column_name": "to_symbol",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "code_relations",
+    "column_name": "relation_type",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "document_chunks",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "document_chunks",
+    "column_name": "document_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "document_chunks",
+    "column_name": "heading",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "document_chunks",
+    "column_name": "start_line",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "document_chunks",
+    "column_name": "end_line",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "text",
+    "table_name": "document_chunks",
+    "column_name": "content",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "tsvector",
+    "table_name": "document_chunks",
+    "column_name": "content_tsv",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "documents",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "documents",
+    "column_name": "source_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "documents",
+    "column_name": "content_hash",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "documents",
+    "column_name": "model",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "documents",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "embeddings",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "USER-DEFINED",
+    "table_name": "embeddings",
+    "column_name": "embedding",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "embeddings",
+    "column_name": "model",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "feedback",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "feedback",
+    "column_name": "message_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "feedback",
+    "column_name": "owner",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "feedback",
+    "column_name": "rating",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "flyway_schema_history",
+    "column_name": "installed_rank",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "version",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "description",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "type",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "script",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "flyway_schema_history",
+    "column_name": "checksum",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "flyway_schema_history",
+    "column_name": "installed_by",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp without time zone",
+    "table_name": "flyway_schema_history",
+    "column_name": "installed_on",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "integer",
+    "table_name": "flyway_schema_history",
+    "column_name": "execution_time",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "flyway_schema_history",
+    "column_name": "success",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "ingestion_jobs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "ingestion_jobs",
+    "column_name": "source_name",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "ingestion_jobs",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "ingestion_jobs",
+    "column_name": "detail",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "ingestion_jobs",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "message_sources",
+    "column_name": "message_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "message_sources",
+    "column_name": "chunk_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "outbox_events",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "event_type",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "outbox_events",
+    "column_name": "status",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "outbox_events",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "processed_events",
+    "column_name": "event_id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "processed_events",
+    "column_name": "processed_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "prompt_templates",
+    "column_name": "name",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "integer",
+    "table_name": "prompt_templates",
+    "column_name": "version",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "text",
+    "table_name": "prompt_templates",
+    "column_name": "template",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "repositories",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "repositories",
+    "column_name": "name",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "repositories",
+    "column_name": "active",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "true"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "retrieval_logs",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "retrieval_logs",
+    "column_name": "actor",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "jsonb",
+    "table_name": "retrieval_logs",
+    "column_name": "chunk_ids",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "bigint",
+    "table_name": "retrieval_logs",
+    "column_name": "latency_ms",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "retrieval_logs",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "source_files",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "source_files",
+    "column_name": "name",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "source_files",
+    "column_name": "provider",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "source_files",
+    "column_name": "audience",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "source_files",
+    "column_name": "active_version",
+    "is_nullable": "YES",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "boolean",
+    "table_name": "source_files",
+    "column_name": "deleted",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "false"
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "source_files",
+    "column_name": "updated_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  },
+  {
+    "data_type": "uuid",
+    "table_name": "tool_invocations",
+    "column_name": "id",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tool_invocations",
+    "column_name": "actor",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tool_invocations",
+    "column_name": "tool_name",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "character varying",
+    "table_name": "tool_invocations",
+    "column_name": "outcome",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": null
+  },
+  {
+    "data_type": "timestamp with time zone",
+    "table_name": "tool_invocations",
+    "column_name": "created_at",
+    "is_nullable": "NO",
+    "table_schema": "knowledge",
+    "column_default": "now()"
+  }
+]

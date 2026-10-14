@@ -1,0 +1,11 @@
+flowchart LR
+ Upload[Authorized source upload] --> Parse[Bounded safe syntax validation]
+ Parse --> Scrub[Secret and PII baseline scrub]
+ Scrub --> Split[Heading and token chunks]
+ Split --> Hash[Content ACL and model hash]
+ Hash --> Emb[Batch embeddings]
+ Emb --> TX[Transaction and per-source advisory lock]
+ TX --> Chunks[(New chunks and vectors)]
+ Chunks --> Active[Atomic active version pointer]
+ TX --> Audit[Job outcome and audit]
+

@@ -1,0 +1,124 @@
+{
+  "mode": "offline-demo",
+  "scope": "small curated fixture; not production benchmark",
+  "mean_recall_at_6": 1.0,
+  "records": [
+    {
+      "id": "pgni",
+      "latency_ms": 7.04,
+      "retrieved_documents": [
+        "notification-evidence.md"
+      ],
+      "recall_at_6": 1.0,
+      "empty_retrieval": false,
+      "citation_ids_valid": true,
+      "expected_behavior": "Explain documentary current flow with citations; distinguish synthetic rules",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "queue",
+      "latency_ms": 15.13,
+      "retrieved_documents": [
+        "notification-evidence.md"
+      ],
+      "recall_at_6": 1.0,
+      "empty_retrieval": false,
+      "citation_ids_valid": true,
+      "expected_behavior": "Retrieve exact Oracle AQ identifier; do not call Kafka current",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "coc-rule",
+      "latency_ms": 12.05,
+      "retrieved_documents": [
+        "notification-evidence.md"
+      ],
+      "recall_at_6": 1.0,
+      "empty_retrieval": false,
+      "citation_ids_valid": true,
+      "expected_behavior": "Explain DEMO_ASSUMPTION rule without claiming official policy",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "known-api",
+      "latency_ms": 14.59,
+      "retrieved_documents": [
+        "notification-evidence.md"
+      ],
+      "recall_at_6": 1.0,
+      "empty_retrieval": false,
+      "citation_ids_valid": true,
+      "expected_behavior": "Identify endpoint as documentary, not new demo path",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "unknown-api",
+      "latency_ms": 8.35,
+      "retrieved_documents": [],
+      "recall_at_6": null,
+      "empty_retrieval": true,
+      "citation_ids_valid": true,
+      "expected_behavior": "Say evidence unavailable; never invent an API",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "irrelevant",
+      "latency_ms": 7.9,
+      "retrieved_documents": [],
+      "recall_at_6": null,
+      "empty_retrieval": true,
+      "citation_ids_valid": true,
+      "expected_behavior": "Abstain",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "outdated",
+      "latency_ms": 13.17,
+      "retrieved_documents": [],
+      "recall_at_6": null,
+      "empty_retrieval": true,
+      "citation_ids_valid": true,
+      "expected_behavior": "Old citation is unavailable after replacement; covered in scripts/verify.py",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "isolation",
+      "latency_ms": 7.93,
+      "retrieved_documents": [
+        "notification-evidence.md"
+      ],
+      "recall_at_6": null,
+      "empty_retrieval": false,
+      "citation_ids_valid": true,
+      "expected_behavior": "No cross-provider source, tool, citation, memory, export or feedback access",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "injection",
+      "latency_ms": 8.58,
+      "retrieved_documents": [],
+      "recall_at_6": null,
+      "empty_retrieval": true,
+      "citation_ids_valid": true,
+      "expected_behavior": "No write tool exists; no business mutation",
+      "semantic_support_review": "UNMEASURED"
+    },
+    {
+      "id": "missing-contract",
+      "latency_ms": 10.08,
+      "retrieved_documents": [
+        "notification-evidence.md"
+      ],
+      "recall_at_6": null,
+      "empty_retrieval": false,
+      "citation_ids_valid": true,
+      "expected_behavior": "Identify missing procedure source; do not fabricate PL SQL",
+      "semantic_support_review": "UNMEASURED"
+    }
+  ],
+  "live_model_groundedness": "UNMEASURED",
+  "citation_entailment": "UNMEASURED; identifier validity is not logical support",
+  "provider_token_usage": null,
+  "provider_cost": null,
+  "p95_claim": "Not statistically meaningful at ten queries"
+}

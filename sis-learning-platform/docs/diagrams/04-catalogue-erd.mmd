@@ -1,0 +1,13 @@
+erDiagram
+ providers ||--o{ courses : offers
+ providers ||--o{ campuses : locates
+ providers ||--o{ modules : owns
+ courses ||--o{ course_modules : contains
+ modules ||--o{ course_modules : included
+ courses ||--o{ course_variants : varies
+ campuses ||--o{ course_variants : hosts
+ academic_years ||--o{ course_variants : dates
+ qualifications ||--o{ course_variants : awards
+ providers ||--o{ subscriptions : subscribes
+ academic_years ||--o{ subscriptions : bounds
+

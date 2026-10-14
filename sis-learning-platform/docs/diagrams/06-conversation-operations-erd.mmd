@@ -1,0 +1,24 @@
+erDiagram
+ chat_sessions ||--o{ chat_messages : owns
+ chat_sessions ||--o{ chat_turns : processes
+ chat_messages ||--o{ feedback : receives
+ chat_sessions ||--o{ agent_runs : tracks
+ audit_logs {
+  uuid id PK
+  string actor
+  string event_type
+ }
+ retrieval_logs {
+  uuid id PK
+  json chunk_ids
+  long latency_ms
+ }
+ tool_invocations {
+  uuid id PK
+  string outcome
+ }
+ ingestion_jobs {
+  uuid id PK
+  string status
+ }
+

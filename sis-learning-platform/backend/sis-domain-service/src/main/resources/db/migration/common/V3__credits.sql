@@ -1,0 +1,1 @@
+ALTER TABLE applications ADD COLUMN credits integer NOT NULL DEFAULT 120 CHECK(credits BETWEEN 1 AND 180);

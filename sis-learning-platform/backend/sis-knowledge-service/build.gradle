@@ -1,0 +1,27 @@
+plugins { id 'org.springframework.boot' }
+dependencies {
+ implementation 'org.apache.commons:commons-csv:1.14.1'
+ implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.8.17'
+ implementation project(':backend:shared')
+ implementation 'org.springframework.boot:spring-boot-starter-web'
+ implementation 'org.springframework.boot:spring-boot-starter-security'
+ implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+ implementation 'org.springframework.boot:spring-boot-starter-validation'
+ implementation 'org.springframework.boot:spring-boot-starter-actuator'
+ implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+ implementation 'org.flywaydb:flyway-core'
+ implementation 'org.flywaydb:flyway-database-postgresql'
+ runtimeOnly 'org.postgresql:postgresql'
+ testImplementation 'org.springframework.security:spring-security-test'
+ implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+ implementation 'org.springframework.ai:spring-ai-client-chat'
+ implementation 'org.springframework.ai:spring-ai-rag'
+ implementation 'com.github.javaparser:javaparser-core:3.27.1'
+ implementation 'com.github.jsqlparser:jsqlparser:5.3'
+ implementation 'org.yaml:snakeyaml:2.5'
+}
+
+tasks.named('processResources') {
+ from(rootProject.file('docs/entity-inventory.csv')) { into 'catalogue' }
+ from(rootProject.file('docs/architecture.md')) { into 'catalogue' }
+}

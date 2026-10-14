@@ -1,0 +1,53 @@
+"""Real browser checks; uses only local synthetic demo data."""
+import uuid,json
+from pathlib import Path
+from playwright.sync_api import sync_playwright,expect
+root=Path(__file__).resolve().parents[1]
+config=dict(x.split('=',1) for x in (root/'.env').read_text().splitlines() if x and not x.startswith('#'))
+def login(page,user='advisor-a'):
+ page.get_by_label('Account',exact=True).select_option(user)
+ page.get_by_label('Local password',exact=True).fill(config['SIS_DEMO_PASSWORD'])
+ page.get_by_role('button',name='Sign in',exact=True).click()
+with sync_playwright() as p:
+ browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True)
+ page=browser.new_page(viewport={'width':1440,'height':1000})
+ page.goto('http://127.0.0.1:5174');login(page)
+ expect(page.get_by_role('heading',name='Applications',exact=True)).to_be_visible()
+ page.get_by_label('Source reference',exact=True).fill('UI-'+uuid.uuid4().hex[:12])
+ page.get_by_label('Fictitious student name',exact=True).fill('Fictitious Portal Learner')
+ page.get_by_role('button',name='Create application',exact=True).click()
+ page.wait_for_url('**/applications/*')
+ expect(page.get_by_role('heading',name='Fictitious Portal Learner',exact=True)).to_be_visible()
+ detail_url=page.url
+ page.get_by_role('button',name='Confirm registration',exact=True).click()
+ expect(page.locator('.summary').get_by_text('CONFIRMED',exact=True)).to_have_count(1)
+ page.get_by_role('button',name='Confirm attendance',exact=True).click()
+ expect(page.locator('.summary').get_by_text('CONFIRMED',exact=True)).to_have_count(2)
+ page.get_by_role('button',name='Schedule demo payments',exact=True).click()
+ expect(page.get_by_role('heading',name='Payment schedule (demo 25/25/remainder)',exact=True)).to_be_visible()
+ page.get_by_label('Change type',exact=True).select_option('SUSPENSION')
+ page.get_by_role('button',name='Validate only',exact=True).click()
+ expect(page.get_by_text('"valid": true',exact=False)).to_be_visible()
+ page.get_by_role('button',name='Submit CoC',exact=True).click()
+ expect(page.locator('.summary').get_by_text('SUSPENDED',exact=True)).to_be_visible()
+ page.reload();login(page)
+ expect(page.get_by_role('heading',name='Fictitious Portal Learner',exact=True)).to_be_visible()
+ expect(page.locator('.summary').get_by_text('SUSPENDED',exact=True)).to_be_visible()
+ page.get_by_role('link',name='Knowledge assistant',exact=True).click()
+ page.get_by_label('Question',exact=True).fill('Explain PGNI notification processing')
+ page.get_by_role('button',name='Ask / retry',exact=True).click()
+ expect(page.get_by_role('heading',name='Answer',exact=True)).to_be_visible(timeout=20000)
+ expect(page.locator('.answer')).to_contain_text('SIMULATED')
+ expect(page.locator('.citation').first).to_be_visible()
+ page.locator('.citation').first.click()
+ expect(page.get_by_role('heading',name='Evidence / live result',exact=True)).to_be_visible()
+ page.screenshot(path='/tmp/sis-desktop.png',full_page=True)
+ page.set_viewport_size({'width':390,'height':844})
+ assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'),'Mobile overflow'
+ page.screenshot(path='/tmp/sis-mobile.png',full_page=True)
+ page.get_by_role('button',name='Sign out',exact=True).click()
+ page.goto(detail_url);login(page,'advisor-b')
+ expect(page.get_by_role('alert')).to_contain_text('404')
+ browser.close()
+(root/'evaluation/latest-browser.json').write_text(json.dumps({'passed':['login','application intake','registration','attendance','payment request','CoC preview and submission','refresh persistence','streamed simulated answer','citation viewer','mobile layout','cross-provider detail denial']},indent=2))
+print('PASS: browser intake, confirmations, CoC, persistence, streaming, citation, mobile layout and provider isolation')

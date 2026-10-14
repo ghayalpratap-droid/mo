@@ -1,0 +1,19 @@
+{
+  "profile": "integration",
+  "checks": [
+    "application intake, idempotency, read-only role and cross-provider denial",
+    "registration, attendance, stale-version conflict and exact payment amounts",
+    "side-effect-free preview, rejected and accepted CoCs, immutable timeline",
+    "CSV valid/invalid/duplicate rows and authorized result download",
+    "real pgvector, exact identifiers, bidirectional source ACL and owned sessions/feedback",
+    "live-data tool reads actual authorized business status",
+    "failed indexing preserves good version; replacement/deletion revoke stale citations and memory",
+    "runtime roles cannot update audit or history records",
+    "documentation role checks and safe XML ingestion rejection",
+    "authenticated buffered SSE and no mutation from retrieved injection text in offline mode",
+    "generated credentials are absent from built frontend assets"
+  ],
+  "applicationId": "69a74319-ee9d-455f-ac45-4636559dbee5",
+  "measured_at": "2026-10-14T19:59:38Z",
+  "live_model_quality": "UNMEASURED; offline adapters only"
+}

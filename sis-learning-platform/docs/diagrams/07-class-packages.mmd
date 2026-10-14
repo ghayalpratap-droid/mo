@@ -1,0 +1,27 @@
+classDiagram
+ class BusinessController
+ class BusinessService
+ class Applications
+ class StudentApplication
+ class CatalogueController
+ class OutboxSimulator
+ class ExternalReceiver
+ class LocalIntegrationSimulator
+ class KnowledgeController
+ class ChatTurns
+ class KnowledgeStore
+ class ModelGateway
+ class OwnedChatMemory
+ class BusinessTools
+ BusinessController --> BusinessService
+ BusinessService --> Applications
+ Applications --> StudentApplication
+ BusinessService --> OutboxSimulator : durable event
+ OutboxSimulator --> ExternalReceiver
+ ExternalReceiver <|.. LocalIntegrationSimulator
+ KnowledgeController --> ChatTurns
+ ChatTurns --> KnowledgeStore
+ ChatTurns --> ModelGateway
+ ChatTurns --> OwnedChatMemory
+ ModelGateway --> BusinessTools
+

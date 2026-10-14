@@ -1,0 +1,8 @@
+stateDiagram-v2
+ [*] --> RUNNING : source validated
+ RUNNING --> SUCCEEDED : atomic active version switch
+ RUNNING --> FAILED : parse embedding or write failure
+ FAILED --> PreviousVersion : retain last usable evidence
+ SUCCEEDED --> [*]
+ PreviousVersion --> [*]
+

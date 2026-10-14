@@ -1,0 +1,9 @@
+stateDiagram-v2
+ [*] --> RUNNING : bounded CSV accepted
+ RUNNING --> COMPLETED : every row has result
+ COMPLETED --> [*]
+ note right of RUNNING
+   Row outcomes CREATED or INVALID
+   Crash recovery is not implemented
+ end note
+

@@ -1,0 +1,13 @@
+flowchart LR
+ Question[Question and owned session] --> Mask[Mask input]
+ Mask --> Memory[Reauthorized bounded memory]
+ Memory --> ACL[Provider audience and active version filters]
+ ACL --> Semantic[Vector candidates]
+ ACL --> Keyword[Keyword and exact identifier candidates]
+ Semantic --> RRF[Rank fusion and deduplication]
+ Keyword --> RRF
+ RRF --> Model[Context and read-only tools]
+ Model --> Citations[Validate citation identifiers and recheck ACL]
+ Citations --> Stream[Buffered validated SSE]
+ Stream --> Persist[Completed messages and provenance]
+

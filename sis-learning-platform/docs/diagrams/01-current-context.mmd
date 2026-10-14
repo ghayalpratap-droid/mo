@@ -1,0 +1,12 @@
+flowchart LR
+ Portal[Legacy JSF portal] --> Legacy[Legacy Spring and Hibernate]
+ EDS[EDS and Mule] --> Boot[Java 8 Boot 2.3 services]
+ CLASS[CLASS] --> Rabbit[RabbitMQ]
+ Rabbit --> Boot
+ Legacy --> Oracle[(Oracle schemas and PL SQL)]
+ Boot --> Oracle
+ Boot --> AQ[Oracle AQ JMS]
+ AQ --> Downstream[CEM DSFS LAP and LLE]
+ Boot --> BAS[BAS API]
+ Boot --> BCF[BCF API]
+

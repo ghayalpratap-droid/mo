@@ -1,0 +1,4 @@
+sourceRef,studentName,source,courseId,academicYear,fee
+DEMO-CSV-001,Fictitious CSV Learner,LLE,A-M1,2026,100.05
+invalid
+DEMO-CSV-001,Fictitious CSV Learner,LLE,A-M1,2026,100.05

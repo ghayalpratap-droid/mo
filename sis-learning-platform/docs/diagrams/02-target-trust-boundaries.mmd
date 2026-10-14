@@ -1,0 +1,22 @@
+flowchart LR
+ subgraph Browser[Browser boundary]
+  UI[React TypeScript portal]
+ end
+ subgraph Trusted[Authenticated application boundary]
+  B[Domain service]
+  K[Knowledge service]
+  R[Typed read tools]
+ end
+ subgraph DB[Database ownership boundary]
+  Business[(business schema)]
+  Knowledge[(knowledge schema and pgvector)]
+ end
+ UI -->|Bearer identity| B
+ UI -->|Bearer identity| K
+ B --> Business
+ K --> Knowledge
+ K --> R
+ R -->|Reauthorized API read| B
+ K -->|Masked context only| Model[OpenAI or visible offline adapter]
+ B --> Sim[Named local integration simulators]
+

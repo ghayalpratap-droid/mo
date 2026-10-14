@@ -1,0 +1,11 @@
+stateDiagram-v2
+ [*] --> ACTIVE : synthetic intake
+ ACTIVE --> SUSPENDED : valid suspension
+ SUSPENDED --> ACTIVE : valid resumption
+ ACTIVE --> WITHDRAWN : withdrawal
+ SUSPENDED --> WITHDRAWN : withdrawal
+ ACTIVE --> CANCELLED : cancellation
+ SUSPENDED --> CANCELLED : cancellation
+ WITHDRAWN --> [*]
+ CANCELLED --> [*]
+
